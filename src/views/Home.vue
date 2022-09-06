@@ -1,18 +1,33 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <b-container fluid class="bv-example-row ">
+    <b-row class="row-container-home">
+      <b-col md="4" style="background-color: grey;">
+        <Sidebar />
+      </b-col>
+      <b-col>
+        <CreateButton />
+        <router-view />
+      </b-col>
+    </b-row>
+
+  </b-container>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Sidebar from "../components/Sidebar.vue";
+import CreateButton from "../components/CreateButton.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
-  }
-}
+    Sidebar,
+    CreateButton, 
+  },
+};
 </script>
+
+<style scoped>
+.row-container-home{
+  height: 100vh;
+}
+</style>
