@@ -1,29 +1,55 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import store from "../store"
 
-Vue.use(VueRouter)
+import CreateIncome from "../components/Incomes/CreateIncome"
+import CreateSpending from "../components/Spendings/CreateSpending"
+
+import Login from "../views/Login"
+import Movements from "../views/Movements"
+
+Vue.use(VueRouter);
+
+const checkUser = (async (to, from, next) => {
+  if (await store.dispatch("getCurrentUser")) {
+    next(); 
+  }
+  /* Si requiere auth y no esta logueado */
+  else {
+    next({name: 'Login'});
+  }
+});
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/login",
+    name: "Login",
+    component: Login,
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+    path: "/",
+    name: "Home",
+    component: Movements,
+    beforeEnter: checkUser,
+  },
+  {
+    path: "/createIncome",
+    name: "CreateIncome",
+    component: CreateIncome,
+    beforeEnter: checkUser,
+  },
+  {
+    path: "/createSpending",
+    name: "CreateSpending",
+    component: CreateSpending,
+    beforeEnter: checkUser,
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
