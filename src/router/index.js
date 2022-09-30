@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import store from "../store"
 
 import CreateIncome from "../components/Incomes/CreateIncome"
+import EditIncome from "../components/Incomes/EditIncome"
+
 import CreateSpending from "../components/Spendings/CreateSpending"
 
 import Login from "../views/Login"
@@ -36,6 +38,12 @@ const routes = [
     path: "/createIncome",
     name: "CreateIncome",
     component: CreateIncome,
+    beforeEnter: checkUser,
+  },
+  {
+    path: "/:id/editIncome",
+    name: "EditIncome",
+    component: EditIncome,
     beforeEnter: checkUser,
   },
   {
