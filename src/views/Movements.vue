@@ -7,6 +7,7 @@
     >
       Ingresos
     </b-button>
+    |
     <b-button
       class="text-decoration-none"
       variant="link"
@@ -19,8 +20,8 @@
 </template>
 
 <script>
-import ShowIncomes from "../components/ShowIncomes.vue";
-import ShowEgress from "../components/ShowEgress.vue";
+import ShowIncomes from "../components/Incomes/ShowIncomes.vue";
+import ShowEgress from "../components/Spendings/ShowEgress.vue";
 
 export default {
   name: "Movements",
