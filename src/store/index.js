@@ -41,6 +41,19 @@ export default new Vuex.Store({
       await supabaseClient.auth.signOut();
       context.commit("setUser", null);
     },
+
+
+
+    async createIncome(context, incomeData) {
+      incomeData.user_id = context.state.userData.id;
+      incomeData.type = "income";
+
+      const { error } = await supabaseClient
+        .from("movements")
+        .insert([incomeData]);
+
+      if (error) throw error;
+    },
   },
 
   modules: {},
