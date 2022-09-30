@@ -3,39 +3,42 @@
     :position="position"
     :bg-color="bgColor"
     :actions="fabActions"
-    @income="addIncome"
-    @agress="addEgress"
+    fixed-tooltip="tooltip"
+    @income="createIncome"
+    @agress="createEgress"
   >
   </fab>
 </template>
 
 <script>
 import fab from "vue-fab";
+
 export default {
   name: "CreateSpending",
   data() {
     return {
-      bgColor: "#778899",
+      bgColor: "#7C59BC",
       position: "bottom-right",
       fabActions: [
         {
           name: "income",
-          icon: "cached",
+          icon: "payments",
+          tooltip: 'Agregar ingreso',
         },
         {
           name: "agress",
-          icon: "add_alert",
+          icon: "shopping_bag",
+          tooltip: 'Agregar gasto',
         },
       ],
     };
   },
   methods: {
-    addIncome() {
-      console.log("ingreso");
+    createIncome() {
+      this.$router.push("/createIncome");
     },
-    addEgress() {
-      console.log("egreso");
-      this.$router.push("/createSpending")
+    createEgress() {
+      this.$router.push("/createSpending");
     },
   },
   components: {
