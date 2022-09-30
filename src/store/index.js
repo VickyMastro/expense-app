@@ -11,10 +11,6 @@ export default new Vuex.Store({
   },
 
   getters: {
-    getIncomes(state) {
-      return state.userDataIncome;
-    },
-
     getUser(state) {
       return state.userData;
     },
@@ -59,6 +55,13 @@ export default new Vuex.Store({
       context.commit("setIncome", incomes.data);
     },
 
+    async getIncome(context, incomeId) {
+      const income = await supabaseClient
+        .from("movements")
+        .select("*")
+        .eq("id", incomeId);
+      return income.data[0];
+    },
 
     async createIncome(context, incomeData) {
       incomeData.user_id = context.state.userData.id;
@@ -67,6 +70,15 @@ export default new Vuex.Store({
       const { error } = await supabaseClient
         .from("movements")
         .insert([incomeData]);
+
+      if (error) throw error;
+    },
+
+    async editIncome(context,{ incomeData, id}){
+      const { error } = await supabaseClient
+        .from("movements")
+        .update([incomeData])
+        .match({id: id});
 
       if (error) throw error;
     },
