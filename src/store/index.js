@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     userData: null,
+    incomes: [],
   },
 
   getters: {
@@ -21,12 +22,20 @@ export default new Vuex.Store({
     getFullNameUser(state) {
       return state.userData.user_metadata.full_name;
     },
+
+    incomes(state) {
+      return state.incomes;
+    },
   },
 
   mutations: {
     // alteran al estado al recibir info
     setUser(state, user) {
       state.userData = user;
+    },
+
+    setIncome(state, income) {
+      state.incomes = income;
     },
   },
 
@@ -42,6 +51,13 @@ export default new Vuex.Store({
       context.commit("setUser", null);
     },
 
+    async getIncomes(context) {
+      const incomes = await supabaseClient
+        .from("movements")
+        .select("*")
+        .eq("type", "income");
+      context.commit("setIncome", incomes.data);
+    },
 
 
     async createIncome(context, incomeData) {
