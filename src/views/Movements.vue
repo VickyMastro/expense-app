@@ -11,7 +11,7 @@
     <b-button
       class="text-decoration-none"
       variant="link"
-      @click="changeView('ShowEgress')"
+      @click="changeView('ShowSpendings')"
     >
       Egresos
     </b-button>
@@ -21,7 +21,7 @@
 
 <script>
 import ShowIncomes from "../components/Incomes/ShowIncomes.vue";
-import ShowEgress from "../components/Spendings/ShowEgress.vue";
+import ShowSpendings from "../components/Spendings/ShowSpendings.vue";
 
 export default {
   name: "Movements",
@@ -37,7 +37,7 @@ export default {
   },
   components: {
     ShowIncomes,
-    ShowEgress,
+    ShowSpendings,
   },
 };
 </script>

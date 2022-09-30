@@ -5,7 +5,7 @@
     :actions="fabActions"
     fixed-tooltip="tooltip"
     @income="createIncome"
-    @agress="createEgress"
+    @agress="createSpending"
   >
   </fab>
 </template>
@@ -37,7 +37,7 @@ export default {
     createIncome() {
       this.$router.push("/createIncome");
     },
-    createEgress() {
+    createSpending() {
       this.$router.push("/createSpending");
     },
   },
