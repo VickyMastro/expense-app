@@ -18,7 +18,7 @@
         ></b-icon>
       </b-col>
 
-      <b-col style="border: 1px solid #7c59bc" cols="8">
+      <b-col style="border: 1px solid #7c59bc" cols="7">
         <b-row>
           <b-col lg="12" class="d-flex justify-content-center">
             {{ income.title }}
@@ -33,6 +33,7 @@
         style="border: 1px solid #7c59bc"
       >
         {{ income.date }}
+        <b-icon class="h4" icon="x-circle" id="buttonDelete" @click.stop="deleteIncome(income.id)"></b-icon>
       </b-col>
     </b-row>
   </b-container>
@@ -49,6 +50,10 @@ export default {
   methods: {
     editIncome(incomeId) {
       this.$router.push({ name: "EditIncome", params: { id: incomeId } });
+    },
+
+    deleteIncome(incomeId){
+      this.$store.dispatch("deleteIncome", incomeId)
     },
   },
   computed: {

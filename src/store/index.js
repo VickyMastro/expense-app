@@ -82,6 +82,17 @@ export default new Vuex.Store({
 
       if (error) throw error;
     },
+
+    async deleteIncome(context, incomeId){
+      const { error } = await supabaseClient
+        .from("movements")
+        .delete()
+        .match({id: incomeId});
+
+      if (error) throw error;
+
+      context.dispatch("getIncomes");
+    }
   },
 
   modules: {},
