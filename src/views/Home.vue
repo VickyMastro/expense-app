@@ -2,7 +2,7 @@
   <b-container fluid class="bv-example-row ">
     <b-row class="row-container-home" v-if="!getUser">
       <b-col>
-        <Login />
+        <router-view />
       </b-col>
     </b-row>
 
@@ -22,7 +22,6 @@
 <script>
 import { mapGetters } from "vuex";
 
-import Login from "../views/Login.vue";
 import Sidebar from "../components/Sidebar.vue";
 import CreateButton from "../components/CreateButton.vue";
 
@@ -32,7 +31,6 @@ export default {
     ...mapGetters(["getUser"]),
   },
   components: {
-    Login,
     Sidebar,
     CreateButton, 
   },
