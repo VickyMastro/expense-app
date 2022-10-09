@@ -1,15 +1,23 @@
 <template>
   <b-container>
+    <!--   [{income}, {income}], "2022-07-07, {2022-07-07: [{income}, {income}]}"] -->
+    <div :key="key" v-for="(incomesDate, key) in incomesOrderByDate">
+     <b-row>
+      <b-col class="d-flex mt-2">
+        <span>{{key}}</span>
+      </b-col>
+     </b-row>
     <b-row
       class="mt-2"
       style="height: 60px"
-      @click="editIncome(income.id)"
+      align-h="center"
       :key="income.id"
-      v-for="income in incomes"
+      v-for="income in incomesDate"
     >
       <b-col
         class="d-flex justify-content-center align-items-center"
         style="border: 1px solid #7c59bc"
+        cols="1"
       >
         <b-icon
           class="h3"
@@ -18,24 +26,26 @@
         ></b-icon>
       </b-col>
 
-      <b-col style="border: 1px solid #7c59bc" cols="7">
+      <b-col style="border: 1px solid #7c59bc" cols="6" @click="editIncome(income.id)">
         <b-row>
-          <b-col lg="12" class="d-flex justify-content-center">
+          <b-col cols="12" class="d-flex justify-content-center">
             {{ income.title }}
           </b-col>
-          <b-col lg="6" md="6"> {{ income.account }} </b-col>
-          <b-col lg="6" md="6"> {{ income.cash }} </b-col>
+          <b-col cols="6"> BBVA </b-col>
+          <b-col cols="6"> {{ income.cash }} </b-col>
         </b-row>
       </b-col>
 
       <b-col
         class="d-flex justify-content-center align-items-center"
         style="border: 1px solid #7c59bc"
+        cols="1"
       >
-        {{ income.date }}
         <b-icon class="h4" icon="x-circle" id="buttonDelete" @click.stop="deleteIncome(income.id)"></b-icon>
       </b-col>
     </b-row>
+    </div>
+
   </b-container>
 </template>
 
@@ -57,7 +67,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["incomes"]),
+    ...mapGetters(["incomesOrderByDate"]),
   },
 };
 </script>

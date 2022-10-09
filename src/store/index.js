@@ -19,11 +19,20 @@ export default new Vuex.Store({
       return state.userData.user_metadata.full_name;
     },
 
-    incomes(state) {
-      return state.incomes;
+    incomesOrderByDate(state) {
+      let orderByDate = {};
+      state.incomes.forEach((income) => {
+        // eslint-disable-next-line no-prototype-builtins
+        if(orderByDate.hasOwnProperty(income.date)){
+          orderByDate[income.date].push(income)
+        } else{
+          orderByDate[income.date] = [income]
+        }
+      });
+      return orderByDate;
     },
   },
-
+  
   mutations: {
     // alteran al estado al recibir info
     setUser(state, user) {
@@ -51,7 +60,8 @@ export default new Vuex.Store({
       const incomes = await supabaseClient
         .from("movements")
         .select("*")
-        .eq("type", "income");
+        .eq("type", "income")
+        .order("date", {ascending: false});
       context.commit("setIncome", incomes.data);
     },
 
