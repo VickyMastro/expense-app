@@ -62,8 +62,8 @@ export default {
       this.$router.push({ name: "EditIncome", params: { id: incomeId } });
     },
 
-    deleteIncome(incomeId){
-      this.$store.dispatch("deleteIncome", incomeId)
+    async deleteIncome(incomeId){
+      await this.$store.dispatch("deleteIncome", incomeId)
     },
   },
   computed: {
