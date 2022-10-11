@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { supabaseClient } from "@/supabase/Client.js";
 import incomesModule from "@/store/modules/incomesModule.js";
+import spendingsModule from "@/store/modules/spendingsModule.js";
 
 Vue.use(Vuex);
 
@@ -42,5 +43,6 @@ export default new Vuex.Store({
 
   modules: {
     incomesModule,
+    spendingsModule,
   },
 });
