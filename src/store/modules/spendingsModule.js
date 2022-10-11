@@ -1,6 +1,5 @@
 import { supabaseClient } from "@/supabase/Client.js";
 export default {
-  namespaced: true,
   state: {
     spendings: [],
   },

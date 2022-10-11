@@ -41,7 +41,7 @@ export default {
     },
 
     async createIncome(context, incomeData) {
-      incomeData.user_id = context.state.userData.id;
+      incomeData.user_id = context.rootState.userData.id;
       incomeData.type = "income";
 
       const { error } = await supabaseClient
