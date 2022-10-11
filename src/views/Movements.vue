@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Cashboxes />
     <b-button
       class="text-decoration-none"
       variant="link"
@@ -20,6 +21,7 @@
 </template>
 
 <script>
+import Cashboxes from "../components/cashboxes/Cashboxes.vue";
 import ShowIncomes from "../components/Incomes/ShowIncomes.vue";
 import ShowSpendings from "../components/Spendings/ShowSpendings.vue";
 
@@ -36,6 +38,7 @@ export default {
     },
   },
   components: {
+    Cashboxes,
     ShowIncomes,
     ShowSpendings,
   },
