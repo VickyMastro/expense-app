@@ -6,6 +6,7 @@ import CreateIncome from "../components/Incomes/CreateIncome"
 import EditIncome from "../components/Incomes/EditIncome"
 
 import CreateSpending from "../components/Spendings/CreateSpending"
+import EditSpending from "../components/Spendings/EditSpending"
 
 import Login from "../views/Login"
 import Movements from "../views/Movements"
@@ -50,6 +51,12 @@ const routes = [
     path: "/createSpending",
     name: "CreateSpending",
     component: CreateSpending,
+    beforeEnter: checkUser,
+  },
+  {
+    path: "/:id/editSpending",
+    name: "EditSpending",
+    component: EditSpending,
     beforeEnter: checkUser,
   },
 ];
