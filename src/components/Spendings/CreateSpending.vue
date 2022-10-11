@@ -12,7 +12,7 @@
 
 <script>
 import FormSpending from "@/components/Spendings/FormSpending.vue";
-import { mapActions } from "vuex";
+// import { mapActions } from "vuex";
 
 export default {
   name: "CreateSpending",
@@ -27,9 +27,9 @@ export default {
     };
   },
   methods: {
-    ...mapActions({
-      createSpending: "spendingsModule/createSpending",
-    }),
+    // ...mapActions({
+    //   createSpending: "spendingsModule/createSpending",
+    // }),
     
     setValue(name, value) {
       this.spendingData[name] = value;
@@ -37,7 +37,7 @@ export default {
 
     async addSpending() {
       try {
-        await this.createSpending(this.spendingData);
+        await this.$store.dispatch("createSpending", this.spendingData);
         this.$router.push("/");
       } catch (error) {
         console.log("error en create", error);

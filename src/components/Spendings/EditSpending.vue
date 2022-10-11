@@ -2,7 +2,11 @@
   <FormSpending :spendingData="spendingData" @setValue="setValue">
     <b-row class="mt-5">
       <b-col class="pb-2">
-        <b-button variant="outline-primary" size="md" @click="editSpendingButton">
+        <b-button
+          variant="outline-primary"
+          size="md"
+          @click="editSpendingButton"
+        >
           Editar gasto
         </b-button>
       </b-col>
@@ -12,12 +16,14 @@
 
 <script>
 import FormSpending from "@/components/Spendings/FormSpending";
-import { mapActions } from "vuex";
 
 export default {
   name: "EditSpending",
   async mounted() {
-    const response = await this.getSpending(this.$route.params.id);
+    const response = await this.$store.dispatch(
+      "getSpending",
+      this.$route.params.id
+    );
     for (let propertyName in this.spendingData) {
       this.spendingData[propertyName] = response[propertyName];
     }
@@ -33,18 +39,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions({
-      getSpending: "spendingsModule/getSpending",
-      editSpending: "spendingsModule/editSpending",
-    }),
-
     setValue(name, value) {
       this.spendingData[name] = value;
     },
 
     async editSpendingButton() {
       try {
-        await this.editSpending({
+        await this.$store.dispatch("editSpending", {
           spendingData: this.spendingData,
           id: this.$route.params.id,
         });

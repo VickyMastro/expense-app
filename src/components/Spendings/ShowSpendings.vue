@@ -58,29 +58,24 @@
 </template>
 
 <script>
-// para obtener getters o actiones de modulos
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ShowSpendings",
-  mounted() {
-    this.$store.dispatch("spendingsModule/getSpendings");
+  async mounted() {
+    await this.$store.dispatch("getSpendings");
   },
-  methods: {
-    ...mapActions({
-      deleteSpending: "spendingsModule/deleteSpending",
-    }),
-    
+  methods: {  
     redirectToEditSpending(spendingId) {
       this.$router.push({ name: "EditSpending", params: { id: spendingId } });
     },
 
     async deleteSpending(spendingId) {
-      await this.deleteSpending(spendingId);
+      await this.$store.dispatch("deleteSpending", spendingId);
     },
   },
   computed: {
-    ...mapGetters("spendingsModule" ,["spendingsOrderByDate"]),
+    ...mapGetters(["spendingsOrderByDate"]),
   },
 };
 </script>
