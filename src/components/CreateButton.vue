@@ -6,6 +6,7 @@
     fixed-tooltip="tooltip"
     @income="createIncome"
     @agress="createSpending"
+    @transfer="createTransfer"
   >
   </fab>
 </template>
@@ -30,16 +31,28 @@ export default {
           icon: "shopping_bag",
           tooltip: 'Agregar gasto',
         },
+        {
+          name: "transfer",
+          icon: "sync_alt",
+          tooltip: 'Transferencia',
+        },
       ],
     };
   },
   methods: {
     createIncome() {
-      this.$router.push("/createIncome");
+      if (this.$route.path !== "/createIncome"){
+        this.$router.push("/createIncome");
+      }
     },
     createSpending() {
-      this.$router.push("/createSpending");
+      if (this.$route.path !== "/createSpending"){
+        this.$router.push("/createSpending");
+      }
     },
+    createTransfer(){
+      console.log("creando transferencia")
+    }
   },
   components: {
     fab,
