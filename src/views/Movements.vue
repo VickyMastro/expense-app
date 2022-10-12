@@ -1,21 +1,23 @@
 <template>
   <div>
     <Cashboxes />
-    <b-button
-      class="text-decoration-none"
-      variant="link"
-      @click="changeView('ShowIncomes')"
-    >
-      Ingresos
-    </b-button>
-    |
-    <b-button
-      class="text-decoration-none"
-      variant="link"
-      @click="changeView('ShowSpendings')"
-    >
-      Egresos
-    </b-button>
+    <div class="mt-3">
+      <span
+        class="movements-buttons"
+        :class="{'underline': componentToShow=='ShowIncomes',}"
+        @click="changeView('ShowIncomes')"
+      >
+        Ingresos
+      </span>
+      |
+      <span
+        class="movements-buttons"
+        :class="{'underline': componentToShow=='ShowSpendings',}"
+        @click="changeView('ShowSpendings')"
+      >
+        Gastos
+      </span>
+    </div>
     <component :is="componentToShow"></component>
   </div>
 </template>
@@ -34,7 +36,7 @@ export default {
   },
   methods: {
     changeView(componentName) {
-        this.componentToShow = componentName
+      this.componentToShow = componentName;
     },
   },
   components: {
@@ -44,3 +46,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.movements-buttons{
+  font-size: 28px;
+  color: rgb(138 123 165);
+  cursor: pointer;
+}
+.underline{
+  color: rgb(124 89 188);
+}
+</style>
