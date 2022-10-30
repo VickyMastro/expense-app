@@ -12,8 +12,8 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
 // Vue Toast Notification
-import VueToast from 'vue-toast-notification';
-import 'vue-toast-notification/dist/theme-sugar.css';
+import VueToast from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-sugar.css";
 Vue.use(VueToast);
 
 new Vue({
