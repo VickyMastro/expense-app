@@ -1,7 +1,10 @@
 <template>
   <b-container>
-<!--   [{spending}, {spending}], "2022-07-07, {2022-07-07: [{spending}, {spending}]}"] -->
-    <div :key="key" v-for="(spendingDate, key) in spendingsOrderByDate">
+    <div v-if="Object.keys(spendingsOrderByDate).length === 0" class="pt-2">
+      <p>Aún no hay gastos registrados</p>
+    </div>
+    <!--   [{spending}, {spending}], "2022-07-07, {2022-07-07: [{spending}, {spending}]}"] -->
+    <div :key="key" v-for="(spendingDate, key) in spendingsOrderByDate" v-else>
       <b-row>
         <b-col class="d-flex mt-2">
           <span>{{ key }}</span>
@@ -65,7 +68,7 @@ export default {
   async mounted() {
     await this.$store.dispatch("getSpendings");
   },
-  methods: {  
+  methods: {
     redirectToEditSpending(spendingId) {
       this.$router.push({ name: "EditSpending", params: { id: spendingId } });
     },
