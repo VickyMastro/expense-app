@@ -1,6 +1,19 @@
 <template>
   <b-container fluid class="mt-4">
-    Crear ingreso
+    <b-row>
+      <b-col cols="3">
+        <b-icon
+          class="redirect-icon h3 mt-2"
+          icon="arrow-left-short"
+          variant="dark"
+          @click="redirectToHome"
+        ></b-icon>
+      </b-col>
+      <b-col cols="9" align-self="center"> 
+        <span style="padding-right: 40%">Crear ingreso</span>  
+      </b-col>
+    </b-row>
+
     <!-- fecha del ingreso -->
     <b-row class="mt-4" align-v="center">
       <b-col sm="3">
@@ -72,5 +85,16 @@ export default {
       ],
     };
   },
+  methods: {
+    redirectToHome() {
+      this.$router.push("/");
+    },
+  },
 };
 </script>
+
+<style scoped>
+.redirect-icon{
+  cursor: pointer;
+}
+</style>
