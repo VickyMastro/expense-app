@@ -12,10 +12,12 @@
 
 <script>
 import FormSpending from "@/components/Spendings/FormSpending.vue";
-// import { mapActions } from "vuex";
 
 export default {
   name: "CreateSpending",
+  mounted() {
+    this.spendingData.date = new Date().toISOString().split("T")[0];
+  },
   data() {
     return {
       spendingData: {
@@ -27,10 +29,6 @@ export default {
     };
   },
   methods: {
-    // ...mapActions({
-    //   createSpending: "spendingsModule/createSpending",
-    // }),
-    
     setValue(name, value) {
       this.spendingData[name] = value;
     },

@@ -15,11 +15,14 @@ import FormIncome from "@/components/Incomes/FormIncome";
 
 export default {
   name: "CreateIncome",
+  mounted() {
+    this.incomeData.date = new Date().toISOString().split("T")[0];
+  },
   data() {
     return {
       incomeData: {
         title: "",
-        account_id: 1,
+        account_id: "",
         cash: "",
         date: "",
       },
