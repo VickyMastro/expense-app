@@ -28,6 +28,7 @@ export default {
         .from("movements")
         .select("*")
         .eq("type", "income")
+        .eq("user_id", context.rootState.userData.id)
         .order("date", { ascending: false });
       context.commit("setIncome", incomes.data);
     },

@@ -28,6 +28,7 @@ export default {
         .from("movements")
         .select("*")
         .eq("type", "outflow")
+        .eq("user_id", context.rootState.userData.id)
         .order("date", { ascending: false });
       context.commit("setSpendings", spendings.data);
     },
