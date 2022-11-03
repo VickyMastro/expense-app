@@ -7,22 +7,18 @@
           :navigationEnabled="true"
           :paginationEnabled="false"
         >
-          <slide class="p-2">
-            <b-card
-              class="cashboxes-cards"
-              style="height: 183px"
-              @click="addCashbox"
-            >
+          <slide class="p-2 d-flex justify-content-center align-items-center">
+            <b-card class="new-cashbox-card" @click="addCashbox">
               <b-img
                 src="https://iedhiggzgrkhvvelhcks.supabase.co/storage/v1/object/public/images/add.png?t=2022-10-11T18%3A00%3A23.533Z"
                 v-bind="mainProps"
                 rounded="circle"
                 alt="Circle image"
               ></b-img>
-              <b-card-text>Agregar nueva caja</b-card-text>
+              <b-card-text>Agregar caja</b-card-text>
             </b-card>
 
-            <NewCashboxModal/>
+            <NewCashboxModal />
           </slide>
 
           <slot></slot>
@@ -41,27 +37,28 @@ export default {
   data() {
     return {
       mainProps: {
-        width: 75,
-        height: 75,
-        class: "m1",
+        width: 50,
+        height: 50,
       },
     };
   },
   methods: {
     addCashbox() {
-      this.$root.$emit('bv::show::modal', 'NewCashboxModal')
+      this.$root.$emit("bv::show::modal", "NewCashboxModal");
     },
   },
   components: {
     Carousel,
     Slide,
-    NewCashboxModal
-},
+    NewCashboxModal,
+  },
 };
 </script>
 
 <style scoped>
-.cashboxes-cards {
+.new-cashbox-card {
+  width: 60%;
+  height: 80%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   font-size: 20px;
   cursor: pointer;

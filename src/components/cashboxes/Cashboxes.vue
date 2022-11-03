@@ -56,6 +56,7 @@ export default {
 <style scoped>
 .cashboxes-cards {
   max-height: 183px;
+  max-width: 190px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   font-size: 18px;
   cursor: pointer;
