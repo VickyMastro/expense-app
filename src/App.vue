@@ -5,17 +5,20 @@
 </template>
 
 <script>
-import Home from "./views/Home.vue"
+import Home from "./views/Home.vue";
 export default {
   name: "App",
+  async created() {
+    await this.$store.dispatch("searchBanks");
+  },
   components: {
     Home,
-  }
+  },
 };
 </script>
 
 <style lang="scss">
-@import './scss/custom.scss';
+@import "./scss/custom.scss";
 @import "~bootstrap/scss/bootstrap.scss";
 @import "~bootstrap-vue/dist/bootstrap-vue.css";
 #app {

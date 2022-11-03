@@ -38,5 +38,16 @@ export default {
       const banks = await supabaseClient.from("banks").select("*");
       context.commit("setBanks", banks.data);
     },
+
+    async createCashbox(context, cashboxData) {
+      cashboxData.user_id = context.rootState.userData.id;
+
+      const { error } = await supabaseClient
+        .from("accounts")
+        .insert([cashboxData]);
+
+      if (error) throw error;
+      context.dispatch("searchCashboxes");
+    },
   },
 };
