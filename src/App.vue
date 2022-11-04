@@ -10,6 +10,7 @@ export default {
   name: "App",
   async created() {
     await this.$store.dispatch("searchBanks");
+    await this.$store.dispatch("searchCashboxes");
   },
   components: {
     Home,
