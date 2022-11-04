@@ -9,8 +9,8 @@
           @click="redirectToHome"
         ></b-icon>
       </b-col>
-      <b-col cols="9" align-self="center"> 
-        <span style="padding-right: 40%">Crear ingreso</span>  
+      <b-col cols="9" align-self="center">
+        <span style="padding-right: 40%">Crear ingreso</span>
       </b-col>
     </b-row>
 
@@ -73,28 +73,31 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "FormIncome",
   props: ["incomeData"],
-  data() {
-    return {
-      options: [
-        { value: "a", text: "Mercado Pago" },
-        { value: "b", text: "BBVA" },
-        { value: "c", text: "Billetera" },
-      ],
-    };
-  },
   methods: {
     redirectToHome() {
       this.$router.push("/");
     },
   },
+  computed: {
+    ...mapGetters(["getCashboxes"]),
+    options(){
+      let cashboxes = [{ value: null, text: "Seleccionar cuenta" }];
+      this.getCashboxes.forEach((cashbox) => {
+        cashboxes.push({ value: cashbox.id, text: cashbox.name });
+      });
+      return cashboxes;
+    }
+  },
 };
 </script>
 
 <style scoped>
-.redirect-icon{
+.redirect-icon {
   cursor: pointer;
 }
 </style>

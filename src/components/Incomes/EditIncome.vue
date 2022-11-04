@@ -28,7 +28,7 @@ export default {
     return {
       incomeData: {
         title: "",
-        account_id: 1,
+        account_id: null,
         cash: "",
         date: "",
       },
