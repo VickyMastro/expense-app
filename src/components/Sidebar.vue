@@ -16,11 +16,11 @@
 
     <b-row align-v="center" class="row-container">
       <b-col>
-        <p>Calendario para elegir mes</p>
+        <Calendar />
         <p style="font-size: 35px">Saldo total</p>
-        <b-button size="lg" style="background-color: inherit; border: none">{{
-          userData.totalAmount
-        }}</b-button>
+        <span style="background-color: inherit; font-size: 30px; color: white">
+          {{ amountFormatter(getTotalBalance) }}
+        </span>
       </b-col>
     </b-row>
 
@@ -34,24 +34,23 @@
 
 <script>
 import { mapGetters } from "vuex";
+import Calendar from "./Calendar";
+import { amountFormatter } from "@/utils/amountFormatter.js";
 
 export default {
   name: "Sidebar",
-  data() {
-    return {
-      userData: {
-        totalAmount: "$100.000,00",
-      },
-    };
-  },
   methods: {
+    amountFormatter,
     logout() {
       this.$store.dispatch("doLogout");
       this.$router.push("/login");
     },
   },
   computed: {
-    ...mapGetters(["getFullNameUser"]),
+    ...mapGetters(["getFullNameUser", "getTotalBalance"]),
+  },
+  components: {
+    Calendar,
   },
 };
 </script>
@@ -61,7 +60,7 @@ export default {
   height: 45vh;
 }
 
-.user-icon{
+.user-icon {
   cursor: pointer;
 }
 </style>

@@ -39,7 +39,7 @@
               {{ spending.title }}
             </b-col>
             <b-col cols="6"> BBVA </b-col>
-            <b-col cols="6"> {{ spending.cash }} </b-col>
+            <b-col cols="6"> {{ amountFormatter(spending.cash) }} </b-col>
           </b-row>
         </b-col>
 
@@ -62,6 +62,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { amountFormatter } from "@/utils/amountFormatter.js";
 
 export default {
   name: "ShowSpendings",
@@ -69,6 +70,7 @@ export default {
     await this.$store.dispatch("getSpendings");
   },
   methods: {
+    amountFormatter,
     redirectToEditSpending(spendingId) {
       this.$router.push({ name: "EditSpending", params: { id: spendingId } });
     },

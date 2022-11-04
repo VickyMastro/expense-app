@@ -12,6 +12,12 @@ export default {
     getBanks(state) {
       return state.banks;
     },
+
+    getTotalBalance(state) {
+      return state.cashboxes.reduce((count, cashbox) => {
+        return count + cashbox.balance;
+      }, 0);
+    },
   },
   mutations: {
     setCashboxes(state, cashboxes) {

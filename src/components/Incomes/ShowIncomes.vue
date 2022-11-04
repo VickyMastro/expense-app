@@ -40,7 +40,7 @@
               {{ income.title }}
             </b-col>
             <b-col cols="6"> BBVA </b-col>
-            <b-col cols="6"> {{ income.cash }} </b-col>
+            <b-col cols="6"> {{ amountFormatter(income.cash) }} </b-col>
           </b-row>
         </b-col>
 
@@ -50,7 +50,7 @@
           cols="1"
         >
           <b-icon
-            class="h4"
+            class="button-delete-income h4"
             icon="x-circle"
             id="buttonDelete"
             @click.stop="deleteIncome(income.id)"
@@ -63,6 +63,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { amountFormatter } from "@/utils/amountFormatter.js";
 
 export default {
   name: "ShowIncome",
@@ -70,12 +71,14 @@ export default {
     this.$store.dispatch("getIncomes");
   },
   methods: {
+    amountFormatter,
     editIncome(incomeId) {
       this.$router.push({ name: "EditIncome", params: { id: incomeId } });
     },
 
     async deleteIncome(incomeId) {
       await this.$store.dispatch("deleteIncome", incomeId);
+      await this.$store.dispatch("searchCashboxes");
     },
   },
   computed: {
@@ -84,4 +87,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.button-delete-income {
+  cursor: pointer;
+}
+</style>
