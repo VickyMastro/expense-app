@@ -1,16 +1,16 @@
 <template>
-  <b-container fluid class="bv-example-row ">
-    <b-row class="row-container-home" v-if="!getUser">
+  <b-container fluid>
+    <b-row class="container-home" v-if="!getUser">
       <b-col>
         <router-view />
       </b-col>
     </b-row>
 
-    <b-row class="row-container-home" v-else >
-      <b-col md="4" style="background-color: #7C59BC;">
+    <b-row class="container-home" v-else >
+      <b-col md="4" style="background-color: var(--primary);">
         <Sidebar />
       </b-col>
-      <b-col>
+      <b-col md="8" >
         <CreateButton />
         <router-view />
       </b-col>
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style scoped>
-.row-container-home{
+.container-home{
   height: 100vh;
 }
 </style>
