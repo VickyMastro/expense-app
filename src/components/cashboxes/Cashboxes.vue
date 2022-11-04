@@ -2,15 +2,17 @@
   <div>
     <MyCarousel>
       <slide class="p-2" :key="index" v-for="(cashbox, index) in getCashboxes">
-        <b-card class="cashboxes-cards" @click="openCashbox">
-          <b-img
-            :src="cashbox.icon_url"
-            v-bind="mainProps"
-            rounded="circle"
-            alt="Circle image"
-          ></b-img>
-          <b-card-text> {{ cashbox.name }} </b-card-text>
-          <b-card-text> {{ amountFormatter(cashbox.balance) }} </b-card-text>
+        <b-card class="cashboxes-cards" no-body @click="openCashbox">
+          <b-card-body class="p-3">
+            <b-img
+              :src="cashbox.icon_url"
+              v-bind="mainProps"
+              rounded="circle"
+              alt="Circle image"
+            ></b-img>
+            <b-card-text> {{ cashbox.name }} </b-card-text>
+            <b-card-text> {{ amountFormatter(cashbox.balance) }} </b-card-text>
+          </b-card-body>
         </b-card>
       </slide>
     </MyCarousel>
@@ -25,9 +27,6 @@ import { Slide } from "vue-carousel";
 
 export default {
   name: "Cashboxes",
-  async created() {
-    await this.$store.dispatch("searchCashboxes");
-  },
   data() {
     return {
       mainProps: {
@@ -55,8 +54,8 @@ export default {
 
 <style scoped>
 .cashboxes-cards {
-  max-height: 183px;
-  max-width: 190px;
+  max-height: 100%;
+  max-width: 80%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   font-size: 18px;
   cursor: pointer;
