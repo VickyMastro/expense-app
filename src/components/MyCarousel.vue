@@ -60,7 +60,7 @@ export default {
   width: 60%;
   height: 80%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  font-size: 20px;
+  font-size: 17px;
   cursor: pointer;
 }
 </style>
