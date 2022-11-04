@@ -26,7 +26,7 @@ export default {
     async getSpendings(context) {
       const spendings = await supabaseClient
         .from("movements")
-        .select("*")
+        .select(`*, accounts(name)`)
         .eq("type", "outflow")
         .eq("user_id", context.rootState.userData.id)
         .order("date", { ascending: false });
@@ -50,6 +50,7 @@ export default {
         .insert([spendingData]);
 
       if (error) throw error;
+      context.dispatch("searchCashboxes", null, { root: true });
     },
 
     async editSpending(context, { spendingData, id }) {
@@ -59,6 +60,7 @@ export default {
         .match({ id: id });
 
       if (error) throw error;
+      context.dispatch("searchCashboxes", null, { root: true });
     },
 
     async deleteSpending(context, spendingId) {
@@ -70,6 +72,7 @@ export default {
       if (error) throw error;
 
       context.dispatch("getSpendings");
+      context.dispatch("searchCashboxes", null, { root: true });
     },
   },
 };

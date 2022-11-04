@@ -26,7 +26,7 @@ export default {
     async getIncomes(context) {
       const incomes = await supabaseClient
         .from("movements")
-        .select("*")
+        .select(`*, accounts(name)`)
         .eq("type", "income")
         .eq("user_id", context.rootState.userData.id)
         .order("date", { ascending: false });
@@ -50,6 +50,7 @@ export default {
         .insert([incomeData]);
 
       if (error) throw error;
+      context.dispatch("searchCashboxes", null, { root: true });
     },
 
     async editIncome(context, { incomeData, id }) {
@@ -59,6 +60,7 @@ export default {
         .match({ id: id });
 
       if (error) throw error;
+      context.dispatch("searchCashboxes", null, { root: true });
     },
 
     async deleteIncome(context, incomeId) {
@@ -70,6 +72,7 @@ export default {
       if (error) throw error;
 
       context.dispatch("getIncomes");
+      context.dispatch("searchCashboxes", null, { root: true });
     },
   },
 };
