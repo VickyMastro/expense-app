@@ -39,7 +39,7 @@
             <b-col cols="12" class="d-flex justify-content-center">
               {{ income.title }}
             </b-col>
-            <b-col cols="6"> BBVA </b-col>
+            <b-col cols="6"> {{ income.accounts.name }} </b-col>
             <b-col cols="6"> {{ amountFormatter(income.cash) }} </b-col>
           </b-row>
         </b-col>
