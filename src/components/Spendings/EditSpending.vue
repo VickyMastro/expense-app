@@ -20,12 +20,20 @@ import FormSpending from "@/components/Spendings/FormSpending";
 export default {
   name: "EditSpending",
   async mounted() {
-    const response = await this.$store.dispatch(
-      "getSpending",
-      this.$route.params.id
-    );
-    for (let propertyName in this.spendingData) {
-      this.spendingData[propertyName] = response[propertyName];
+    try {
+      const response = await this.$store.dispatch(
+        "getSpending",
+        this.$route.params.id
+      );
+      for (let propertyName in this.spendingData) {
+        this.spendingData[propertyName] = response[propertyName];
+      }
+    } catch (error) {
+      this.$router.push("/");
+      this.$toast.error("No fue posible abrir el gasto", {
+        position: "top-right",
+        duration: 4000,
+      });
     }
   },
   data() {
@@ -44,14 +52,28 @@ export default {
     },
 
     async editSpendingButton() {
-      try {
-        await this.$store.dispatch("editSpending", {
-          spendingData: this.spendingData,
-          id: this.$route.params.id,
+      if (
+        !this.spendingData.title ||
+        !this.spendingData.account_id ||
+        !this.spendingData.cash
+      ) {
+        this.$toast.warning("Completa todos los campos para editar el gasto", {
+          position: "top-right",
+          duration: 4000,
         });
-        this.$router.push("/");
-      } catch (error) {
-        console.log("error al editar en spending", error);
+      } else {
+        try {
+          await this.$store.dispatch("editSpending", {
+            spendingData: this.spendingData,
+            id: this.$route.params.id,
+          });
+          this.$router.push("/");
+        } catch (error) {
+          this.$toast.error("No fue posible editar el gasto", {
+            position: "top-right",
+            duration: 4000,
+          });
+        }
       }
     },
   },

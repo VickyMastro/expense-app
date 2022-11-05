@@ -34,11 +34,25 @@ export default {
     },
 
     async addIncome() {
-      try {
-        await this.$store.dispatch("createIncome", this.incomeData);
-        this.$router.push("/");
-      } catch (error) {
-        console.log("error en create", error);
+      if (
+        !this.incomeData.title ||
+        !this.incomeData.account_id ||
+        !this.incomeData.cash
+      ) {
+        this.$toast.warning("Completa todos los campos para crear el ingreso", {
+          position: "top-right",
+          duration: 4000,
+        });
+      } else {
+        try {
+          await this.$store.dispatch("createIncome", this.incomeData);
+          this.$router.push("/");
+        } catch (error) {
+          this.$toast.error("No fue posible crear el ingreso", {
+            position: "top-right",
+            duration: 4000,
+          });
+        }
       }
     },
   },

@@ -34,11 +34,25 @@ export default {
     },
 
     async addSpending() {
-      try {
-        await this.$store.dispatch("createSpending", this.spendingData);
-        this.$router.push("/");
-      } catch (error) {
-        console.log("error en create", error);
+      if (
+        !this.spendingData.title ||
+        !this.spendingData.account_id ||
+        !this.spendingData.cash
+      ) {
+        this.$toast.warning("Completa todos los campos para crear un gasto", {
+          position: "top-right",
+          duration: 4000,
+        });
+      } else {
+        try {
+          await this.$store.dispatch("createSpending", this.spendingData);
+          this.$router.push("/");
+        } catch (error) {
+          this.$toast.error("No fue posible crear el gasto", {
+            position: "top-right",
+            duration: 4000,
+          });
+        }
       }
     },
   },

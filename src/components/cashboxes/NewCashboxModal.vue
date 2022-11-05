@@ -69,7 +69,7 @@ export default {
     };
   },
   methods: {
-    createCashbox() {
+    async createCashbox() {
       if (
         !this.cashboxData.initial_balance ||
         !this.cashboxData.icon_url ||
@@ -80,8 +80,15 @@ export default {
           duration: 4000,
         });
       } else {
-        this.$store.dispatch("createCashbox", this.cashboxData);
-        this.$bvModal.hide("NewCashboxModal");
+        try {
+          await this.$store.dispatch("createCashbox", this.cashboxData);
+          this.$bvModal.hide("NewCashboxModal");
+        } catch (error) {
+          this.$toast.error("No fue posible crear la caja", {
+            position: "top-right",
+            duration: 4000,
+          });
+        }
       }
     },
   },

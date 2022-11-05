@@ -38,7 +38,7 @@
             <b-col cols="12" class="d-flex justify-content-center">
               {{ spending.title }}
             </b-col>
-            <b-col cols="6"> {{spending.accounts.name}} </b-col>
+            <b-col cols="6"> {{ spending.accounts.name }} </b-col>
             <b-col cols="6"> {{ amountFormatter(spending.cash) }} </b-col>
           </b-row>
         </b-col>
@@ -67,7 +67,14 @@ import { amountFormatter } from "@/utils/amountFormatter.js";
 export default {
   name: "ShowSpendings",
   async mounted() {
-    await this.$store.dispatch("getSpendings");
+    try {
+      await this.$store.dispatch("getSpendings");
+    } catch (error) {
+      this.$toast.error("No fue posible encontrar los gastos", {
+        position: "top-right",
+        duration: 4000,
+      });
+    }
   },
   methods: {
     amountFormatter,
@@ -76,7 +83,15 @@ export default {
     },
 
     async deleteSpending(spendingId) {
-      await this.$store.dispatch("deleteSpending", spendingId);
+      try {
+        await this.$store.dispatch("deleteSpending", spendingId);
+        await this.$store.dispatch("searchCashboxes");
+      } catch (error) {
+        this.$toast.error("No fue posible eliminar el gasto", {
+            position: "top-right",
+            duration: 4000,
+          });
+      }
     },
   },
   computed: {

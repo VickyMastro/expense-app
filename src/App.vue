@@ -8,7 +8,7 @@
 import Home from "./views/Home.vue";
 export default {
   name: "App",
-  async created() {
+  async mounted() {
     await this.$store.dispatch("searchBanks");
     await this.$store.dispatch("searchCashboxes");
   },

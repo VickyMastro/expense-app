@@ -67,8 +67,15 @@ import { amountFormatter } from "@/utils/amountFormatter.js";
 
 export default {
   name: "ShowIncome",
-  mounted() {
-    this.$store.dispatch("getIncomes");
+  async mounted() {
+    try {
+      await this.$store.dispatch("getIncomes");
+    } catch (error) {
+      this.$toast.error("No fue posible encontrar los ingresos", {
+        position: "top-right",
+        duration: 4000,
+      });
+    }
   },
   methods: {
     amountFormatter,
@@ -77,8 +84,15 @@ export default {
     },
 
     async deleteIncome(incomeId) {
-      await this.$store.dispatch("deleteIncome", incomeId);
-      await this.$store.dispatch("searchCashboxes");
+      try {
+        await this.$store.dispatch("deleteIncome", incomeId);
+        await this.$store.dispatch("searchCashboxes");
+      } catch (error) {
+        this.$toast.error("No fue posible eliminar el ingreso", {
+          position: "top-right",
+          duration: 4000,
+        });
+      }
     },
   },
   computed: {
