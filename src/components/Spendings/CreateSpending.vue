@@ -1,5 +1,5 @@
 <template>
-  <FormSpending :spendingData="spendingData" @setValue="setValue">
+  <FormSpending :spendingData="spendingData" :titleMovement="titleMovement" @setValue="setValue">
     <b-row class="mt-5">
       <b-col class="pb-2">
         <b-button variant="outline-primary" size="md" @click="addSpending">
@@ -20,6 +20,7 @@ export default {
   },
   data() {
     return {
+      titleMovement: "Crear gasto",
       spendingData: {
         title: "",
         account_id: null,

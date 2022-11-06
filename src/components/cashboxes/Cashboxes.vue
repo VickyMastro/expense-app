@@ -1,7 +1,7 @@
 <template>
   <div>
     <MyCarousel>
-      <slide class="p-2" :key="index" v-for="(cashbox, index) in getCashboxes">
+      <slide class="p-3" :key="index" v-for="(cashbox, index) in getCashboxes">
         <b-card class="cashboxes-cards" no-body @click="openCashbox">
           <b-card-body class="p-3">
             <b-img
@@ -56,7 +56,9 @@ export default {
 .cashboxes-cards {
   max-height: 100%;
   max-width: 80%;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin: 0 auto;
+  box-shadow: rgba(138, 123, 165, 0.685) 0px 5px 15px;
+
   font-size: 18px;
   cursor: pointer;
 }

@@ -10,7 +10,7 @@
         ></b-icon>
       </b-col>
       <b-col cols="9" align-self="center">
-        <span style="padding-right: 40%">Crear ingreso</span>
+        <span style="padding-right: 40%">{{ titleMovement }}</span>
       </b-col>
     </b-row>
 
@@ -77,7 +77,7 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "FormIncome",
-  props: ["incomeData"],
+  props: ["incomeData", "titleMovement"],
   methods: {
     redirectToHome() {
       this.$router.push("/");
@@ -85,13 +85,13 @@ export default {
   },
   computed: {
     ...mapGetters(["getCashboxes"]),
-    options(){
+    options() {
       let cashboxes = [{ value: null, text: "Seleccionar cuenta" }];
       this.getCashboxes.forEach((cashbox) => {
         cashboxes.push({ value: cashbox.id, text: cashbox.name });
       });
       return cashboxes;
-    }
+    },
   },
 };
 </script>
