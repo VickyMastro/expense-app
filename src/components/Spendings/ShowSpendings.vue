@@ -72,7 +72,7 @@ export default {
   methods: {
     getDaysNames,
     amountFormatter,
-    redirectToEditSpending(spendingId) {
+    editSpending(spendingId) {
       this.$router.push({ name: "EditSpending", params: { id: spendingId } });
     },
 
