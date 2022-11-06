@@ -3,10 +3,12 @@
     <b-row>
       <b-col cols="12">
         <carousel
-          :perPage="3"
+          :perPage="quantityPerPage"
           :navigationEnabled="true"
           :paginationEnabled="false"
         >
+          <slot></slot>
+
           <slide class="p-2 d-flex justify-content-center align-items-center">
             <b-card class="new-cashbox-card" @click="addCashbox">
               <b-img
@@ -15,13 +17,13 @@
                 rounded="circle"
                 alt="Circle image"
               ></b-img>
-              <b-card-text>Agregar caja</b-card-text>
+              <b-card-text style="overflow-wrap: normal"
+                >Agregar caja
+              </b-card-text>
             </b-card>
 
             <NewCashboxModal />
           </slide>
-
-          <slot></slot>
         </carousel>
       </b-col>
     </b-row>
@@ -31,6 +33,7 @@
 <script>
 import { Carousel, Slide } from "vue-carousel";
 import NewCashboxModal from "./cashboxes/NewCashboxModal.vue";
+import windowSizeMixin from "@/mixins/windowSizeMixin";
 
 export default {
   name: "MyCarousel",
@@ -47,6 +50,12 @@ export default {
       this.$root.$emit("bv::show::modal", "NewCashboxModal");
     },
   },
+  computed: {
+    quantityPerPage() {
+      return this.windowWidth <= 767.98 ? (this.windowWidth <= 576 ? 1 : 2) : 3;
+    },
+  },
+  mixins: [windowSizeMixin],
   components: {
     Carousel,
     Slide,
@@ -58,9 +67,15 @@ export default {
 <style scoped>
 .new-cashbox-card {
   width: 60%;
-  height: 80%;
+  height: 140px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   font-size: 17px;
   cursor: pointer;
+}
+
+@media (max-width: 576px) {
+  .new-cashbox-card {
+    font-size: 20px;
+  }
 }
 </style>
