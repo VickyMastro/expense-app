@@ -11,7 +11,14 @@
               alt="Circle image"
             ></b-img>
             <b-card-text> {{ cashbox.name }} </b-card-text>
-            <b-card-text> {{ amountFormatter(cashbox.balance) }} </b-card-text>
+            <b-card-text
+              :class="{
+                positiveColor: cashbox.balance >= 0,
+                negativeColor: cashbox.balance <= 0,
+              }"
+            >
+              {{ amountFormatter(cashbox.balance) }}
+            </b-card-text>
           </b-card-body>
         </b-card>
       </slide>
@@ -61,5 +68,12 @@ export default {
 
   font-size: 18px;
   cursor: pointer;
+}
+
+.positiveColor {
+  color: green;
+}
+.negativeColor {
+  color: red;
 }
 </style>

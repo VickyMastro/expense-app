@@ -34,8 +34,8 @@
               <b-col cols="4" class="shorten-name d-flex justify-content-start">
                 {{ spending.accounts.name }}
               </b-col>
-              <b-col cols="8">
-                {{ amountFormatter(spending.cash) }}
+              <b-col cols="8" style="color: red">
+               - {{ amountFormatter(spending.cash) }}
               </b-col>
 
               <b-icon
