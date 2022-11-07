@@ -55,5 +55,16 @@ export default {
       if (error) throw error;
       context.dispatch("searchCashboxes");
     },
+
+    async editCashbox(context, {cashboxData, cashboxId}){
+      const { error } = await supabaseClient
+        .from("accounts")
+        .update([cashboxData])
+        .match({ id: cashboxId });
+
+      if (error) throw error;
+      context.dispatch("searchCashboxes");
+    },
+    
   },
 };
