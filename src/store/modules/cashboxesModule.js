@@ -65,6 +65,27 @@ export default {
       if (error) throw error;
       context.dispatch("searchCashboxes");
     },
-    
+
+    async disabledCashbox (context, cashboxId){
+      const { error } = await supabaseClient
+        .from("accounts")
+        .update([{disabled: true}])
+        .match({ id: cashboxId });
+
+      if (error) throw error;
+      context.dispatch("searchCashboxes");
+      context.dispatch("getIncomes", null, { root: true });
+      context.dispatch("getSpendings", null, { root: true });
+    },
+
+    async enableCashbox (context, cashboxId){
+      const { error } = await supabaseClient
+        .from("accounts")
+        .update([{disabled: false}])
+        .match({ id: cashboxId });
+
+      if (error) throw error;
+      context.dispatch("searchCashboxes");
+    }
   },
 };

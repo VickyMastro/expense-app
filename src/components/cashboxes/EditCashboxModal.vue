@@ -51,6 +51,7 @@
             size="sm"
             :class="{ disabledWallet: cashboxInfo.is_wallet }"
             :disabled="cashboxInfo.is_wallet"
+            @click="disabledCashbox()"
           >
             Deshabilitar
           </b-button>
@@ -120,6 +121,22 @@ export default {
             duration: 4000,
           });
         }
+      }
+    },
+
+    async disabledCashbox() {
+      try {
+        await this.$store.dispatch("disabledCashbox", this.cashboxInfo.id);
+        this.$bvModal.hide(this.cashboxId);
+        this.$toast.success("La caja fue deshabilitada", {
+          position: "top-right",
+          duration: 4000,
+        });
+      } catch (error) {
+        this.$toast.error("No fue posible deshabilitar la caja", {
+          position: "top-right",
+          duration: 4000,
+        });
       }
     },
   },
