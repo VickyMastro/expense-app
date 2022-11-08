@@ -1,16 +1,21 @@
 <template>
   <b-container>
     <b-row class="text-start" align-v="center">
-      <b-col sm="2">
-        <b-icon
-          class="user-icon h3 mt-2"
-          icon="person"
-          variant="dark"
-          @click="logout"
-        ></b-icon>
-      </b-col>
-      <b-col sm="10">
-        {{ getFullNameUser }}
+      <b-col class="d-flex">
+        <b-dropdown no-caret variant="primary">
+          <template #button-content>
+            <b-icon
+              class="user-icon mt-2"
+              icon="person"
+              variant="dark"
+            ></b-icon>
+          </template>
+          <b-dropdown-item link-class="bg-white" variant="dark" :to="{name: 'Home'}" >Inicio</b-dropdown-item>
+          <b-dropdown-item link-class="bg-white" variant="dark" disabled>Transferencias</b-dropdown-item>
+          <b-dropdown-item link-class="bg-white" variant="dark" disabled>Categorias</b-dropdown-item>
+          <b-dropdown-item link-class="bg-white" variant="dark" :to="{name: 'DisabledCashboxes'}">Cajas deshabilitadas</b-dropdown-item>
+          <b-dropdown-item link-class="bg-white" variant="danger" @click="logout">Cerrar sesión</b-dropdown-item>
+        </b-dropdown>
       </b-col>
     </b-row>
 
@@ -59,8 +64,8 @@ export default {
 .row-container {
   height: 45vh;
 }
-
 .user-icon {
   cursor: pointer;
+  font-size: 30px !important;
 }
 </style>
