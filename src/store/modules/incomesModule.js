@@ -26,9 +26,10 @@ export default {
     async getIncomes(context) {
       const incomes = await supabaseClient
         .from("movements")
-        .select(`*, accounts(name)`)
+        .select(`*, accounts!inner(name, disabled)`)
         .eq("type", "income")
         .eq("user_id", context.rootState.userData.id)
+        .eq("accounts.disabled", false)
         .order("date", { ascending: false });
       context.commit("setIncome", incomes.data);
     },

@@ -6,7 +6,11 @@ export default {
   },
   getters: {
     getCashboxes(state) {
-      return state.cashboxes;
+      return state.cashboxes.filter((cashbox) => cashbox.disabled === false);
+    },
+
+    getCashboxesDisabled(state) {
+      return state.cashboxes.filter((cashbox) => cashbox.disabled === true);
     },
 
     getBanks(state) {
@@ -14,8 +18,9 @@ export default {
     },
 
     getTotalBalance(state) {
+      // count es el acumulador que inicia en 0
       return state.cashboxes.reduce((count, cashbox) => {
-        return count + cashbox.balance;
+        return cashbox.disabled === false ? count + cashbox.balance : count;
       }, 0);
     },
   },
@@ -56,7 +61,7 @@ export default {
       context.dispatch("searchCashboxes");
     },
 
-    async editCashbox(context, {cashboxData, cashboxId}){
+    async editCashbox(context, { cashboxData, cashboxId }) {
       const { error } = await supabaseClient
         .from("accounts")
         .update([cashboxData])
