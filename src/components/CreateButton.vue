@@ -24,35 +24,35 @@ export default {
         {
           name: "income",
           icon: "payments",
-          tooltip: 'Agregar ingreso',
+          tooltip: "Agregar ingreso",
         },
         {
           name: "agress",
           icon: "shopping_bag",
-          tooltip: 'Agregar gasto',
+          tooltip: "Agregar gasto",
         },
         {
           name: "transfer",
           icon: "sync_alt",
-          tooltip: 'Transferencia',
+          tooltip: "Transferencia",
         },
       ],
     };
   },
   methods: {
     createIncome() {
-      if (this.$route.path !== "/createIncome"){
-        this.$router.push("/createIncome");
+      if (this.$route.path !== "/createIncome") {
+        this.$router.push({name: "CreateIncome"});
       }
     },
     createSpending() {
-      if (this.$route.path !== "/createSpending"){
-        this.$router.push("/createSpending");
+      if (this.$route.path !== "/createSpending") {
+        this.$router.push({name: "CreateSpending"});
       }
     },
-    createTransfer(){
-      console.log("creando transferencia")
-    }
+    createTransfer() {
+      console.log("creando transferencia");
+    },
   },
   components: {
     fab,

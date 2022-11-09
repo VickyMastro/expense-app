@@ -2,15 +2,17 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "@/store";
 
+import IncomesLayout from "@/views/IncomesLayout";
 import CreateIncome from "@/components/Incomes/CreateIncome";
 import EditIncome from "@/components/Incomes/EditIncome";
 
+import SpendingsLayout from "@/views/SpendingsLayout";
 import CreateSpending from "@/components/Spendings/CreateSpending";
 import EditSpending from "@/components/Spendings/EditSpending";
 
 import Login from "@/views/Login";
 import Movements from "@/views/Movements";
-import DisabledCashboxes from "@/components/cashboxes/DisabledCashboxes"
+import DisabledCashboxes from "@/components/cashboxes/DisabledCashboxes";
 
 Vue.use(VueRouter);
 
@@ -19,7 +21,7 @@ const checkUser = async (to, from, next) => {
   if (await store.dispatch("getCurrentUser")) {
     next();
   } else {
-  /* Si requiere auth y no esta logueado */
+    /* Si requiere auth y no esta logueado */
     next({ name: "Login" });
   }
 };
@@ -37,28 +39,38 @@ const routes = [
     beforeEnter: checkUser,
   },
   {
-    path: "/createIncome",
-    name: "CreateIncome",
-    component: CreateIncome,
+    path: "/incomes/",
+    component: IncomesLayout,
     beforeEnter: checkUser,
+    children: [
+      {
+        path: "createIncome",
+        name: "CreateIncome",
+        component: CreateIncome,
+      },
+      {
+        path: ":id/editIncome",
+        name: "EditIncome",
+        component: EditIncome,
+      },
+    ],
   },
   {
-    path: "/:id/editIncome",
-    name: "EditIncome",
-    component: EditIncome,
+    path: "/spendings/",
+    component: SpendingsLayout,
     beforeEnter: checkUser,
-  },
-  {
-    path: "/createSpending",
-    name: "CreateSpending",
-    component: CreateSpending,
-    beforeEnter: checkUser,
-  },
-  {
-    path: "/:id/editSpending",
-    name: "EditSpending",
-    component: EditSpending,
-    beforeEnter: checkUser,
+    children: [
+      {
+        path: "createSpending",
+        name: "CreateSpending",
+        component: CreateSpending,
+      },
+      {
+        path: ":id/editSpending",
+        name: "EditSpending",
+        component: EditSpending,
+      },
+    ],
   },
   {
     path: "/disabledCashboxes",
