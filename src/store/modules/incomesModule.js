@@ -30,6 +30,7 @@ export default {
         .eq("type", "income")
         .eq("user_id", context.rootState.userData.id)
         .eq("accounts.disabled", false)
+        .is("transfer_id", null)
         .order("date", { ascending: false });
       context.commit("setIncome", incomes.data);
     },
