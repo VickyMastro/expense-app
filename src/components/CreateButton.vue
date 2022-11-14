@@ -51,7 +51,9 @@ export default {
       }
     },
     createTransfer() {
-      console.log("creando transferencia");
+      if (this.$route.path !== "/createTransfer") {
+        this.$router.push({name: "CreateTransfer"});
+      }
     },
   },
   components: {
