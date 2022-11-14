@@ -10,11 +10,36 @@
               variant="dark"
             ></b-icon>
           </template>
-          <b-dropdown-item link-class="bg-white" variant="dark" :to="{name: 'Home'}" >Inicio</b-dropdown-item>
-          <b-dropdown-item link-class="bg-white" variant="dark" disabled>Transferencias</b-dropdown-item>
-          <b-dropdown-item link-class="bg-white" variant="dark" disabled>Categorias</b-dropdown-item>
-          <b-dropdown-item link-class="bg-white" variant="dark" :to="{name: 'DisabledCashboxes'}">Cajas deshabilitadas</b-dropdown-item>
-          <b-dropdown-item link-class="bg-white" variant="danger" @click="logout">Cerrar sesión</b-dropdown-item>
+          <b-dropdown-item
+            link-class="bg-white"
+            variant="dark"
+            :to="{ name: 'Home' }"
+            >Inicio</b-dropdown-item
+          >
+          <b-dropdown-item
+            link-class="bg-white"
+            variant="dark"
+            :to="{ name: 'ShowTransfers' }"
+            >Transferencias</b-dropdown-item
+          >
+          <b-dropdown-item
+            link-class="bg-white"
+            variant="dark"
+            :to="{ name: 'Categories' }"
+            >Categorias</b-dropdown-item
+          >
+          <b-dropdown-item
+            link-class="bg-white"
+            variant="dark"
+            :to="{ name: 'DisabledCashboxes' }"
+            >Cajas deshabilitadas</b-dropdown-item
+          >
+          <b-dropdown-item
+            link-class="bg-white"
+            variant="danger"
+            @click="logout"
+            >Cerrar sesión</b-dropdown-item
+          >
         </b-dropdown>
       </b-col>
     </b-row>
