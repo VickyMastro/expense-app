@@ -2,6 +2,10 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "@/store";
 
+import TransfersLayout from "@/views/TransfersLayout";
+import CreateTransfer from "@/components/transfers/CreateTransfer";
+import ShowTransfers from "@/components/transfers/ShowTransfers";
+
 import IncomesLayout from "@/views/IncomesLayout";
 import CreateIncome from "@/components/Incomes/CreateIncome";
 import EditIncome from "@/components/Incomes/EditIncome";
@@ -69,6 +73,23 @@ const routes = [
         path: ":id/editSpending",
         name: "EditSpending",
         component: EditSpending,
+      },
+    ],
+  },
+  {
+    path: "/transfers/",
+    component: TransfersLayout,
+    beforeEnter: checkUser,
+    children: [
+      {
+        path: "createTransfer",
+        name: "CreateTransfer",
+        component: CreateTransfer,
+      },
+      {
+        path: "showTransfers",
+        name: "ShowTransfers",
+        component: ShowTransfers,
       },
     ],
   },
