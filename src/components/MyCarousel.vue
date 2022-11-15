@@ -9,7 +9,10 @@
         >
           <slot></slot>
 
-          <slide class="p-2 d-flex justify-content-center align-items-center">
+          <slide
+            class="p-2 d-flex justify-content-center align-items-center"
+            v-if="showAddCashbox === true"
+          >
             <b-card class="new-cashbox-card" @click="addCashbox">
               <b-img
                 src="https://iedhiggzgrkhvvelhcks.supabase.co/storage/v1/object/public/images/add.png?t=2022-10-11T18%3A00%3A23.533Z"
@@ -37,6 +40,7 @@ import windowSizeMixin from "@/mixins/windowSizeMixin";
 
 export default {
   name: "MyCarousel",
+  props: ["showAddCashbox"],
   data() {
     return {
       mainProps: {

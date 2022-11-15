@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MyCarousel>
+    <MyCarousel :showAddCashbox="showAddCashbox">
       <slide class="p-3" :key="index" v-for="(cashbox, index) in getCashboxes">
         <b-card class="cashboxes-cards" no-body @click="openCashbox(cashbox.name, cashbox.id)">
           <b-card-body class="p-3">
@@ -37,6 +37,7 @@ import { Slide } from "vue-carousel";
 
 export default {
   name: "Cashboxes",
+  props: ["showAddCashbox"],
   data() {
     return {
       mainProps: {
@@ -49,7 +50,11 @@ export default {
   methods: {
     amountFormatter,
     openCashbox(cashboxName, cashboxId) {
-      this.$root.$emit("bv::show::modal", cashboxName +cashboxId);
+      if (this.showAddCashbox){
+        this.$root.$emit("bv::show::modal", cashboxName + cashboxId);
+      } else {
+        this.$emit('getCashboxId', cashboxId)
+      }
     },
   },
   computed: {
