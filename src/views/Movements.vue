@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Cashboxes />
+    <Cashboxes :showAddCashbox="true"/>
     <div class="mt-3">
       <span
         class="movements-buttons"
