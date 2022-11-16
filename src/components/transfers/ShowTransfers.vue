@@ -4,11 +4,11 @@
 
     <b-row>
       <b-col class="mt-2">
-        <p class="title">Movimientos</p>
+        <span class="title">Transferencias</span>
       </b-col>
     </b-row>
 
-    <b-row class="mt-4" :key="key" v-for="(transfer, key) in getTransfers">
+    <b-row class="mt-4" :key="key" v-for="(transfer, key) in transfers">
       <div class="container-movements">
         <b-row>
           <b-col cols="2">
@@ -34,7 +34,7 @@
                   v-bind="iconProps"
                   class="mr-1"
                   rounded="circle"
-                  alt="Icono de la cuenta"
+                  alt="Icono de la cuenta de la que transfirio dinero"
                 ></b-img>
                 {{ transfer.accounts.name }}
               </b-col>
@@ -51,7 +51,7 @@
                   v-bind="iconProps"
                   class="mr-1"
                   rounded="circle"
-                  alt="Icono de la cuenta"
+                  alt="Icono de la cuenta a la que transfirio dinero"
                 ></b-img>
                 {{ transfer.movements[0].accounts.name }}
               </b-col>
@@ -72,16 +72,17 @@
 <script>
 import { mapGetters } from "vuex";
 import { amountFormatter } from "@/utils/amountFormatter";
-import Cashboxes from "../cashboxes/Cashboxes.vue";
+import Cashboxes from "@/components/cashboxes/Cashboxes.vue";
 
 export default {
   name: "ShowTransfers",
   async created() {
-    await this.$store.dispatch("searchTransfers");
+    this.transfers = await this.$store.dispatch("searchTransfers");
     await this.$store.dispatch("searchCashboxes");
   },
   data() {
     return {
+      transfers: [],
       selectCashboxId: null,
       mainProps: {
         width: 75,
@@ -98,10 +99,19 @@ export default {
   methods: {
     amountFormatter,
     getCashboxId(id) {
-      console.log(id);
+      if (this.selectCashboxId !== id) {
+        this.transfers = this.getTransfers.filter((transfer) => {
+          return transfer.account_id === id ||
+            transfer.movements[0].account_id === id
+            ? transfer
+            : null;
+        });
+      } else {
+        this.transfers = this.getTransfers;
+      }
+      this.selectCashboxId = id;
     },
     async deleteTransfer(transferId) {
-      console.log("borrando transferencia", transferId);
       await this.$store.dispatch("deleteTransfer", transferId);
     },
   },

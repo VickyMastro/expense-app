@@ -63,7 +63,6 @@ export default {
           this.$router.push("showTransfers");
 
           this.test = this.transferData;
-          console.log(this.test);
         } catch (error) {
           this.$toast.error("No fue posible crear el ingreso", {
             position: "top-right",

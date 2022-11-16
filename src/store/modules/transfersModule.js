@@ -22,10 +22,10 @@ export default {
         )
         .eq("type", "outflow")
         .eq("user_id", context.rootState.userData.id)
-        .eq("accounts.disabled", false)
         .gt("transfer_id", 0)
         .order("date", { ascending: false });
       context.commit("setTransfers", transfers.data);
+      return transfers.data
     },
 
     async createTransfer(context, transferData) {
