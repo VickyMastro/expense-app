@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <button @click="login">Ingresar</button>
+  <div class="login">
+    <h3 class="pb-3">Inicia sesión con google</h3>
+    <b-button variant="outline-primary" size="md" @click="login">
+      Ingresar
+    </b-button>
   </div>
 </template>
 
@@ -25,3 +28,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.login {
+  height: 100%;
+  padding: 25%;
+  /* background-color: var(--primary); */
+}
+</style>
