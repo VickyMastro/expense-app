@@ -39,6 +39,7 @@ export default {
         "get_accounts",
         {
           userid: context.rootState.userData.id,
+          date_value: context.rootState.filterDate.lastDay,
         }
       );
       if (error) throw error;

@@ -30,6 +30,8 @@ export default {
         .eq("type", "outflow")
         .eq("user_id", context.rootState.userData.id)
         .eq("accounts.disabled", false)
+        .gte("date", context.rootState.filterDate.firstDay)
+        .lte("date", context.rootState.filterDate.lastDay)
         .is("transfer_id", null)
         .order("date", { ascending: false });
       context.commit("setSpendings", spendings.data);

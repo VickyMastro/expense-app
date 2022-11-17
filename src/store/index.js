@@ -11,6 +11,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     userData: null,
+    filterDate: {},
   },
 
   getters: {
@@ -28,8 +29,11 @@ export default new Vuex.Store({
     setUser(state, user) {
       state.userData = user;
     },
-  },
 
+    setFilterDay(state, daysOfMonth) {
+      state.filterDate = daysOfMonth;
+    },
+  },
   actions: {
     async getCurrentUser(context) {
       const user = await supabaseClient.auth.user();
@@ -40,6 +44,13 @@ export default new Vuex.Store({
     async doLogout(context) {
       await supabaseClient.auth.signOut();
       context.commit("setUser", null);
+    },
+
+    filterDate(context, daysOfMonth) {
+      context.commit("setFilterDay", daysOfMonth);
+      context.dispatch("getIncomes");
+      context.dispatch("getSpendings");
+      context.dispatch("searchCashboxes");
     },
   },
 

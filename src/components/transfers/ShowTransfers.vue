@@ -139,6 +139,12 @@ export default {
       }
     },
   },
+  watch: {
+    "$store.state.filterDate": async function () {
+      await this.$store.dispatch("searchTransfers");
+      this.transfers = this.getTransfers;
+    },
+  },
   computed: {
     ...mapGetters(["getTransfers"]),
   },
