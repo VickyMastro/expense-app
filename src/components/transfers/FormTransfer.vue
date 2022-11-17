@@ -6,7 +6,7 @@
           class="redirect-icon h3 mt-2"
           icon="arrow-left-short"
           variant="dark"
-          @click="redirectToHome"
+          @click="redirect"
         ></b-icon>
       </b-col>
       <b-col cols="9" align-self="center">
@@ -92,8 +92,8 @@ export default {
   name: "FormTransfer",
   props: ["transferData", "titleMovement"],
   methods: {
-    redirectToHome() {
-      this.$router.push("/");
+    redirect() {
+      this.$router.push({name: "ShowTransfers"});
     },
   },
   computed: {

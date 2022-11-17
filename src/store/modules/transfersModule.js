@@ -25,7 +25,15 @@ export default {
         .gt("transfer_id", 0)
         .order("date", { ascending: false });
       context.commit("setTransfers", transfers.data);
-      return transfers.data
+      return transfers.data;
+    },
+
+    async getTransfer(context, transferId) {
+      const transfer = await supabaseClient
+        .from("movements")
+        .select(`*, accounts(name), movements(account_id, id)`)
+        .eq("id", transferId);
+      return transfer.data[0];
     },
 
     async createTransfer(context, transferData) {
@@ -36,11 +44,37 @@ export default {
       if (error) throw error;
     },
 
+    async editTransfer(context, transferData) {
+      const { error } = await supabaseClient
+        .from("movements")
+        .update({
+          date: transferData.date,
+          cash: transferData.cash,
+          title: transferData.title,
+          account_id: transferData.from_account_id,
+        })
+        .match({ id: transferData.outflow_id });
+
+      if (error) throw error;
+
+      const { error2 } = await supabaseClient
+        .from("movements")
+        .update({
+          date: transferData.date,
+          cash: transferData.cash,
+          title: transferData.title,
+          account_id: transferData.to_account_id,
+        })
+        .match({ id: transferData.income_id });
+
+      if (error2) throw error2;
+    },
+
     async deleteTransfer(context, transferId) {
       const { error } = await supabaseClient
         .from("movements")
         .delete()
-        .match({ id: transferId })
+        .match({ id: transferId });
 
       if (error) throw error;
       context.dispatch("searchTransfers");

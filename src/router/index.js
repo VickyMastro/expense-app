@@ -4,6 +4,7 @@ import store from "@/store";
 
 import TransfersLayout from "@/views/TransfersLayout";
 import CreateTransfer from "@/components/transfers/CreateTransfer";
+import EditTransfer from "@/components/transfers/EditTransfer";
 import ShowTransfers from "@/components/transfers/ShowTransfers";
 
 import IncomesLayout from "@/views/IncomesLayout";
@@ -85,6 +86,11 @@ const routes = [
         path: "createTransfer",
         name: "CreateTransfer",
         component: CreateTransfer,
+      },
+      {
+        path: ":id/editTransfer",
+        name: "EditTransfer",
+        component: EditTransfer,
       },
       {
         path: "showTransfers",

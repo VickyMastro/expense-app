@@ -8,14 +8,24 @@
       </b-col>
     </b-row>
 
-    <b-row class="mt-4" :key="key" v-for="(transfer, key) in transfers">
-      <div class="container-movements">
+    <b-row v-if="transfers.length === 0">
+      <b-col class="mt-2">
+        <span class="title-2">Aún no se realizaron transferencias</span>
+      </b-col>
+    </b-row>
+
+    <b-row
+      class="mt-4"
+      :key="index"
+      v-for="(transfer, index) in transfers"
+      v-else
+    >
+      <div class="container-movements" @click="editTransfer(transfer.id)">
         <b-row>
           <b-col cols="2">
             <b-icon
-              style="margin-top: 15px"
-              class="h3"
-              icon="exclamation-circle-fill"
+              class="transfer-icon h3"
+              icon="arrow-left-right"
               variant="primary"
             ></b-icon>
           </b-col>
@@ -59,7 +69,7 @@
                 class="button-delete h4"
                 icon="x-circle"
                 id="buttonDelete"
-                @click="deleteTransfer(transfer.id)"
+                @click.stop="deleteTransfer(transfer.id, index)"
               ></b-icon>
             </b-row>
           </b-col>
@@ -111,8 +121,22 @@ export default {
       }
       this.selectCashboxId = id;
     },
-    async deleteTransfer(transferId) {
-      await this.$store.dispatch("deleteTransfer", transferId);
+
+    editTransfer(transferId) {
+      this.$router.push({ name: "EditTransfer", params: { id: transferId } });
+    },
+
+    async deleteTransfer(transferId, index) {
+      try {
+        await this.$store.dispatch("deleteTransfer", transferId);
+        await this.$store.dispatch("searchCashboxes");
+        this.transfers = this.transfers.splice(index, 1);
+      } catch (error) {
+        this.$toast.error("No fue posible eliminar la transferencia", {
+          position: "top-right",
+          duration: 4000,
+        });
+      }
     },
   },
   computed: {
@@ -128,6 +152,16 @@ export default {
 .title {
   font-size: 28px;
   color: rgb(138 123 165);
+}
+.title-2 {
+  font-size: 20px;
+  color: rgb(138 123 165);
+}
+.transfer-icon {
+  margin-top: 15px;
+  padding: 5px;
+  border: 1px solid rgb(138 123 165);
+  border-radius: 30px;
 }
 .container-movements {
   width: 70%;
