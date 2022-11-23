@@ -12,7 +12,7 @@
       </b-row>
 
       <div
-        class="container-spending mt-2"
+        class="container-spending mt-3"
         :key="spending.id"
         v-for="spending in spendingDate"
         @click="editSpending(spending.id)"

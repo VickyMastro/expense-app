@@ -33,7 +33,8 @@ export default {
         .gte("date", context.rootState.filterDate.firstDay)
         .lte("date", context.rootState.filterDate.lastDay)
         .is("transfer_id", null)
-        .order("date", { ascending: false });
+        .order("date", { ascending: false })
+        .order("id", { ascending: false });
       context.commit("setSpendings", spendings.data);
     },
 

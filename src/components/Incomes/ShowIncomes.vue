@@ -13,7 +13,7 @@
       </b-row>
 
       <div
-        class="container-income mt-2"
+        class="container-income mt-3"
         :key="income.id"
         v-for="income in incomesDate"
         @click="editIncome(income.id)"
