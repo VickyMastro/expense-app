@@ -29,7 +29,7 @@
       </b-col>
       <b-col sm="3">
         <input
-        class="form-control"
+          class="form-control"
           type="color"
           v-model="categoryData.icon_color"
           list="listacoloresperfil"
@@ -123,6 +123,9 @@ export default {
     },
 
     async createCategory() {
+      this.categoryData.name =
+        this.categoryData.name.charAt(0).toUpperCase() +
+        this.categoryData.name.slice(1);
       await this.$store.dispatch("createCategory", this.categoryData);
     },
 
@@ -135,7 +138,9 @@ export default {
     options() {
       let categories = [];
       this.getCategories.forEach((category) => {
-        categories.push({ value: category.id, text: category.icon });
+        if (!category.user_id) {
+          categories.push({ value: category.id, text: category.icon });
+        }
       });
       return categories;
     },
