@@ -5,6 +5,7 @@ import incomesModule from "@/store/modules/incomesModule.js";
 import spendingsModule from "@/store/modules/spendingsModule.js";
 import cashboxesModule from "@/store/modules/cashboxesModule.js";
 import transfersModule from "@/store/modules/transfersModule.js";
+import categoriesModule from "@/store/modules/categoriesModule.js";
 
 Vue.use(Vuex);
 
@@ -59,5 +60,6 @@ export default new Vuex.Store({
     spendingsModule,
     cashboxesModule,
     transfersModule,
+    categoriesModule,
   },
 });

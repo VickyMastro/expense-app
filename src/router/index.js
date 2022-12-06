@@ -2,6 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "@/store";
 
+import Categories from "@/components/categories/Categories";
+
 import TransfersLayout from "@/views/TransfersLayout";
 import CreateTransfer from "@/components/transfers/CreateTransfer";
 import EditTransfer from "@/components/transfers/EditTransfer";
@@ -22,8 +24,8 @@ import DisabledCashboxes from "@/components/cashboxes/DisabledCashboxes";
 Vue.use(VueRouter);
 
 const checkUser = async (to, from, next) => {
-  console.log("estoy en router");
-  if (await store.dispatch("getCurrentUser")) {
+  let user = await store.dispatch("getCurrentUser");
+  if (user) {
     next();
   } else {
     /* Si requiere auth y no esta logueado */
@@ -103,6 +105,12 @@ const routes = [
     path: "/disabledCashboxes",
     name: "DisabledCashboxes",
     component: DisabledCashboxes,
+    beforeEnter: checkUser,
+  },
+  {
+    path: "/categories",
+    name: "Categories",
+    component: Categories,
     beforeEnter: checkUser,
   },
 ];
