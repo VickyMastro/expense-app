@@ -41,6 +41,42 @@
       </b-col>
     </b-row>
 
+    <!-- Categorias -->
+    <b-row class="mt-4" align-v="center">
+      <b-col sm="3">
+        <label>Categoria:</label>
+      </b-col>
+      <b-col sm="5" class="d-flex">
+        <b-dropdown
+          no-caret
+          dropright
+          variant="link"
+          toggle-class="text-decoration-none"
+          class="select-category"
+        >
+          <template #button-content>
+            <div class="d-flex">
+              <span class="material-icons">{{ categorySelected.icon }}</span>
+
+              <span style="color: #495057">{{ categorySelected.name }}</span>
+            </div>
+          </template>
+
+          <b-dropdown-item-button
+            :key="category.value"
+            :value="category.value"
+            v-for="category in categories"
+            @click="setCategory(category.icon, category.value, category.name)"
+          >
+            <div class="d-flex mt-1">
+              <span class="material-icons">{{ category.icon }}</span>
+              <span> {{ category.name }}</span>
+            </div>
+          </b-dropdown-item-button>
+        </b-dropdown>
+      </b-col>
+    </b-row>
+
     <!-- Cuenta a la que va el gasto -->
     <b-row class="mt-4" align-v="center">
       <b-col sm="3">
@@ -78,19 +114,60 @@ import { mapGetters } from "vuex";
 export default {
   name: "FormSpending",
   props: ["spendingData", "titleMovement"],
+  async mounted() {
+    await this.$store.dispatch("searchCategories");
+  },
+  data() {
+    return {
+      categorySelected: {
+        id: 11,
+        name: "Otros",
+        icon: "more_horiz",
+      },
+    };
+  },
   methods: {
     redirectToHome() {
       this.$router.push("/");
     },
+    setCategory(icon, id, name) {
+      this.categorySelected = {
+        id,
+        name,
+        icon,
+      };
+      this.$emit("setValue", "category_id", id);
+    },
+  },
+  watch: {
+    "spendingData.category_id": function (categoryId) {
+      if (categoryId) {
+        this.categorySelected = this.categories.find((category) => {
+          return category.value == categoryId;
+        });
+      }
+    },
   },
   computed: {
-    ...mapGetters(["getCashboxes"]),
+    ...mapGetters(["getCashboxes", "getCategories"]),
     options() {
       let cashboxes = [{ value: null, text: "Seleccionar cuenta" }];
       this.getCashboxes.forEach((cashbox) => {
         cashboxes.push({ value: cashbox.id, text: cashbox.name });
       });
       return cashboxes;
+    },
+
+    categories() {
+      let categories = [];
+      this.getCategories.forEach((category) => {
+        categories.push({
+          value: category.id,
+          icon: category.icon,
+          name: category.name,
+        });
+      });
+      return categories;
     },
   },
 };
@@ -99,5 +176,14 @@ export default {
 <style scoped>
 .redirect-icon {
   cursor: pointer;
+}
+.select-category /deep/ .dropdown-menu {
+  max-height: 300px;
+  overflow-y: auto;
+}
+.select-category {
+  color: #ced4da !important;
+  border: 1px solid #ced4da;
+  border-radius: 2px;
 }
 </style>

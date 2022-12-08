@@ -26,7 +26,7 @@ export default {
     async getSpendings(context) {
       const spendings = await supabaseClient
         .from("movements")
-        .select(`*, accounts(name)`)
+        .select(`*, accounts(name, disabled), categories!inner(icon_color, icon)`)
         .eq("type", "outflow")
         .eq("user_id", context.rootState.userData.id)
         .eq("accounts.disabled", false)

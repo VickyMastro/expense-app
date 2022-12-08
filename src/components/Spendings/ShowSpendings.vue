@@ -19,12 +19,13 @@
       >
         <b-row>
           <b-col cols="2">
-            <b-icon
+            <span
+              :style="{ background: spending.categories.icon_color }"
               style="margin-top: 15px"
-              class="h3"
-              icon="exclamation-circle-fill"
-              variant="primary"
-            ></b-icon>
+              class="category-icon material-icons"
+            >
+              {{ spending.categories.icon }}
+            </span>
           </b-col>
           <b-col cols="10">
             <b-row>
@@ -35,7 +36,7 @@
                 {{ spending.accounts.name }}
               </b-col>
               <b-col cols="8" style="color: red">
-               - {{ amountFormatter(spending.cash) }}
+                - {{ amountFormatter(spending.cash) }}
               </b-col>
 
               <b-icon
@@ -95,6 +96,13 @@ export default {
 </script>
 
 <style scoped>
+.category-icon {
+  color: white;
+  margin-top: 15px;
+  margin-left: 5px;
+  padding: 5px;
+  border-radius: 15px;
+}
 .container-spending {
   width: 70%;
   height: 60px;
@@ -105,7 +113,6 @@ export default {
   border-radius: 20px;
   box-shadow: rgb(138 123 165 / 69%) 0px 5px 15px;
 }
-
 .shorten-name {
   width: 100px;
   white-space: nowrap;
@@ -119,7 +126,7 @@ export default {
   position: absolute;
   top: -10px;
   right: 8px;
-  
+
   cursor: pointer;
 }
 
