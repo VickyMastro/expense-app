@@ -20,12 +20,13 @@
       >
         <b-row>
           <b-col cols="2">
-            <b-icon
+            <span
+              :style="{ background: income.categories.icon_color }"
               style="margin-top: 15px"
-              class="h3"
-              icon="exclamation-circle-fill"
-              variant="primary"
-            ></b-icon>
+              class="category-icon material-icons"
+            >
+              {{ income.categories.icon }}
+            </span>
           </b-col>
           <b-col cols="10">
             <b-row>
@@ -96,6 +97,13 @@ export default {
 </script>
 
 <style scoped>
+.category-icon {
+  color: white;
+  margin-top: 15px;
+  margin-left: 5px;
+  padding: 5px;
+  border-radius: 15px;
+}
 .container-income {
   width: 70%;
   height: 60px;
