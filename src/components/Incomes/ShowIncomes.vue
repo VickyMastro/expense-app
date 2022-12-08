@@ -3,7 +3,6 @@
     <div v-if="Object.keys(incomesOrderByDate).length === 0" class="pt-2">
       <p>Aún no hay ingresos registrados</p>
     </div>
-
     <!--   [{income}, {income}], "2022-07-07, {2022-07-07: [{income}, {income}]}"] -->
     <div :key="key" v-for="(incomesDate, key) in incomesOrderByDate" v-else>
       <b-row>
@@ -114,7 +113,6 @@ export default {
   border-radius: 20px;
   box-shadow: rgb(138 123 165 / 69%) 0px 5px 15px;
 }
-
 .shorten-name {
   width: 100px;
   white-space: nowrap;
