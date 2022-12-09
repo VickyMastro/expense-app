@@ -23,11 +23,13 @@
       <div class="container-movements" @click="editTransfer(transfer.id)">
         <b-row>
           <b-col cols="2">
-            <b-icon
-              class="transfer-icon h3"
-              icon="arrow-left-right"
-              variant="primary"
-            ></b-icon>
+            <span
+              :style="{ background: transfer.categories.icon_color }"
+              style="margin-top: 15px"
+              class="category-icon material-icons"
+            >
+              {{ transfer.categories.icon }}
+            </span>
           </b-col>
           <b-col cols="10">
             <b-row align-v="center">
@@ -163,11 +165,12 @@ export default {
   font-size: 20px;
   color: rgb(138 123 165);
 }
-.transfer-icon {
+.category-icon {
+  color: white;
   margin-top: 15px;
+  margin-left: 5px;
   padding: 5px;
-  border: 1px solid rgb(138 123 165);
-  border-radius: 30px;
+  border-radius: 15px;
 }
 .container-movements {
   width: 70%;

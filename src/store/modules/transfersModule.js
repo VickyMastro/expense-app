@@ -18,7 +18,10 @@ export default {
       const transfers = await supabaseClient
         .from("movements")
         .select(
-          `*, accounts(name, icon_url), movements(account_id, type, accounts(name, icon_url))`
+          `*, 
+          accounts(name, icon_url), 
+          categories(icon_color, icon), 
+          movements(account_id, type, accounts(name, icon_url))`
         )
         .eq("type", "outflow")
         .eq("user_id", context.rootState.userData.id)
