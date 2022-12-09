@@ -120,9 +120,9 @@ export default {
   data() {
     return {
       categorySelected: {
-        id: 11,
-        name: "Otros",
-        icon: "more_horiz",
+        id: 25,
+        name: "Inversiones",
+        icon: "trending_up",
       },
     };
   },
@@ -149,7 +149,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getCashboxes", "getCategories"]),
+    ...mapGetters(["getCashboxes", "getIncomesCategories"]),
     options() {
       let cashboxes = [{ value: null, text: "Seleccionar cuenta" }];
       this.getCashboxes.forEach((cashbox) => {
@@ -160,7 +160,7 @@ export default {
 
     categories() {
       let categories = [];
-      this.getCategories.forEach((category) => {
+      this.getIncomesCategories.forEach((category) => {
         categories.push({
           value: category.id,
           icon: category.icon,

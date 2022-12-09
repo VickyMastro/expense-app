@@ -149,7 +149,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getCashboxes", "getCategories"]),
+    ...mapGetters(["getCashboxes", "getSpendingsCategories"]),
     options() {
       let cashboxes = [{ value: null, text: "Seleccionar cuenta" }];
       this.getCashboxes.forEach((cashbox) => {
@@ -160,7 +160,7 @@ export default {
 
     categories() {
       let categories = [];
-      this.getCategories.forEach((category) => {
+      this.getSpendingsCategories.forEach((category) => {
         categories.push({
           value: category.id,
           icon: category.icon,

@@ -15,6 +15,16 @@ export default {
     getUserCategories(state) {
       return state.categories.filter((category) => category.user_id !== null);
     },
+
+    getIncomesCategories(state) {
+      return state.categories.filter((category) => category.type === "income");
+    },
+
+    getSpendingsCategories(state) {
+      return state.categories.filter(
+        (category) => category.type === "spending"
+      );
+    },
   },
   mutations: {
     setCategories(state, category) {
