@@ -7,6 +7,14 @@ export default {
     getCategories(state) {
       return state.categories;
     },
+
+    getDefaultCategories(state) {
+      return state.categories.filter((category) => category.user_id == null);
+    },
+
+    getUserCategories(state) {
+      return state.categories.filter((category) => category.user_id !== null);
+    },
   },
   mutations: {
     setCategories(state, category) {
@@ -18,6 +26,8 @@ export default {
       const categories = await supabaseClient
         .from("categories")
         .select("*")
+        .not("type", "is", null)
+        .or(`user_id.eq.${context.rootState.userData.id}, user_id.is.null`)
         .order("user_id", { ascending: false });
 
       context.commit("setCategories", categories.data);
