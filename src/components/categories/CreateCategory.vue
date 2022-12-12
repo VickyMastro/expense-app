@@ -120,11 +120,7 @@ export default {
             this.categoryData.name.charAt(0).toUpperCase() +
             this.categoryData.name.slice(1);
 
-          console.log(this.categoryData.name);
-          console.log(this.categoryData.icon);
-          console.log(this.categoryData.icon_color);
-          console.log(this.categoryData.type);
-          //   await this.$store.dispatch("createCategory", this.categoryData);
+          await this.$store.dispatch("createCategory", this.categoryData);
         } catch (error) {
           this.$toast.error("No fue posible crear el ingreso", {
             position: "top-right",
