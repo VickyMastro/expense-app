@@ -4,8 +4,9 @@
     <CreateCategory />
 
     <!-- Categorias -->
-    <h5 class="mt-4">Sus categorias</h5>
-    <b-row>
+    <h5 class="mt-4" style="color: rgb(138 123 165)">Sus categorias</h5>
+    <p v-if="getUserCategories.length === 0">Aún no ha creado una categoria</p>
+    <b-row v-else>
       <b-col
         cols="12"
         sm="6"
@@ -14,7 +15,7 @@
         v-for="category in getUserCategories"
       >
         <b-row class="container-category mt-3 mb-2">
-          <b-col cols="2">
+          <b-col cols="3">
             <span
               :style="{ background: category.icon_color }"
               class="category-icon material-icons"
@@ -22,10 +23,10 @@
               {{ category.icon }}
             </span>
           </b-col>
-          <b-col cols="6" class="d-flex align-items-center">
-            <b-col cols="3" class="d-flex">
+          <b-col cols="8" class="d-flex align-items-center">
+            <span>
               {{ category.name }}
-            </b-col>
+            </span>
 
             <b-icon
               class="button-delete h4"
@@ -38,7 +39,7 @@
       </b-col>
     </b-row>
 
-    <h5 class="mt-4">Categorias por defecto</h5>
+    <h5 class="mt-4" style="color: rgb(138 123 165)">Categorias por defecto</h5>
     <b-row>
       <b-col
         cols="12"
@@ -48,7 +49,7 @@
         v-for="category in getDefaultCategories"
       >
         <b-row class="container-category mt-3 mb-2">
-          <b-col cols="2">
+          <b-col cols="3">
             <span
               :style="{ background: category.icon_color }"
               class="category-icon material-icons"
@@ -56,10 +57,10 @@
               {{ category.icon }}
             </span>
           </b-col>
-          <b-col cols="6" class="d-flex align-items-center">
-            <b-col cols="3" class="d-flex">
+          <b-col cols="7" class="d-flex align-items-center">
+            <span>
               {{ category.name }}
-            </b-col>
+            </span>
           </b-col>
         </b-row>
       </b-col>
@@ -110,7 +111,7 @@ export default {
 
   position: absolute;
   top: -10px;
-  right: -90px;
+  right: -30px;
 
   cursor: pointer;
 }
