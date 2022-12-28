@@ -12,6 +12,9 @@ export default {
     await this.$store.dispatch("searchBanks");
     await this.$store.dispatch("searchCashboxes");
   },
+  async created() {
+    await this.$store.dispatch("getCurrentUser");
+  },
   components: {
     Home,
   },
