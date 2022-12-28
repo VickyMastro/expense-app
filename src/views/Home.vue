@@ -48,9 +48,11 @@ export default {
   computed: {
     ...mapGetters(["getUser"]),
     showCalendar() {
-      let isFound = this.$route.path.search("create");
+      let foundCreate = this.$route.path.search("create");
+      let foundEdit = this.$route.path.search("edit");
 
-      return isFound !== -1 ||
+      return foundCreate !== -1 ||
+        foundEdit !== -1 ||
         this.$route.path === "/disabledCashboxes" ||
         this.$route.path === "/categories"
         ? false
