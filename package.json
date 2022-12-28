@@ -12,6 +12,7 @@
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.6.5",
+    "v-money": "^0.8.1",
     "vue": "^2.7.10",
     "vue-carousel": "^0.18.0",
     "vue-fab": "^2.3.1",

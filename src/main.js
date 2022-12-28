@@ -16,6 +16,16 @@ import VueToast from "vue-toast-notification";
 import "vue-toast-notification/dist/theme-sugar.css";
 Vue.use(VueToast);
 
+// sign $
+import money from "v-money";
+Vue.use(money, {
+  decimal: ",",
+  thousands: ".",
+  prefix: "$ ",
+  precision: 2,
+  masked: false,
+});
+
 import { MonthPicker } from "vue-month-picker";
 Vue.use(MonthPicker);
 

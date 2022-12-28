@@ -26,7 +26,7 @@ export default {
         account_id: null,
         cash: "",
         date: "",
-        category_id: null,
+        category_id: 11,
       },
     };
   },
@@ -47,6 +47,7 @@ export default {
         });
       } else {
         try {
+          console.log(this.spendingData)
           await this.$store.dispatch("createSpending", this.spendingData);
           this.$router.push("/");
         } catch (error) {

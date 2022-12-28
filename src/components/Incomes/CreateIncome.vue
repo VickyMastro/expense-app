@@ -26,7 +26,7 @@ export default {
         account_id: null,
         cash: "",
         date: "",
-        category_id: null,
+        category_id: 25,
       },
     };
   },

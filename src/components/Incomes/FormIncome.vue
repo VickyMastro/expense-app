@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="mt-4">
+  <b-container fluid>
     <b-row>
       <b-col cols="3">
         <b-icon
@@ -15,25 +15,31 @@
     </b-row>
 
     <!-- fecha del ingreso -->
-    <b-row class="mt-4" align-v="center">
-      <b-col sm="3">
-        <label>Fecha:</label>
-      </b-col>
-      <b-col sm="5">
+    <b-row class="mt-4" align-v="center" align-h="center">
+      <b-col cols="7" md="5">
         <b-form-input
           type="date"
           :value="incomeData.date"
           @input="(value) => $emit('setValue', 'date', value)"
         ></b-form-input>
       </b-col>
+
+      <!-- Monto del ingreso -->
+      <b-col cols="5" md="3">
+        <money
+          class="form-control"
+          :value="incomeData.cash"
+          @input="(value) => $emit('setValue', 'cash', value)"
+        ></money>
+      </b-col>
     </b-row>
 
     <!-- Titulo -->
-    <b-row class="mt-4" align-v="center">
-      <b-col sm="3">
+    <b-row class="mt-4" align-v="center" align-h="center">
+      <b-col cols="3" md="3">
         <label>Titulo:</label>
       </b-col>
-      <b-col sm="9">
+      <b-col cols="9" md="5">
         <b-form-input
           :value="incomeData.title"
           @input="(value) => $emit('setValue', 'title', value)"
@@ -42,11 +48,11 @@
     </b-row>
 
     <!-- Categorias -->
-    <b-row class="mt-4" align-v="center">
-      <b-col sm="3">
+    <b-row class="mt-4" align-v="center" align-h="center">
+      <b-col cols="4" md="3">
         <label>Categoria:</label>
       </b-col>
-      <b-col sm="5" class="d-flex">
+      <b-col cols="8" md="5" class="d-flex">
         <b-dropdown
           no-caret
           dropright
@@ -78,28 +84,16 @@
     </b-row>
 
     <!-- Cuenta a la que va el ingreso -->
-    <b-row class="mt-4" align-v="center">
-      <b-col sm="3">
+    <b-row class="mt-4" align-v="center" align-h="center">
+      <b-col cols="3" md="3">
         <label>Cuenta:</label>
       </b-col>
-      <b-col sm="3">
+      <b-col cols="7" md="5">
         <b-form-select
           :options="options"
           :value="incomeData.account_id"
           @input="(value) => $emit('setValue', 'account_id', value)"
         ></b-form-select>
-      </b-col>
-
-      <!-- Monto del ingreso -->
-      <b-col sm="3">
-        <label>Monto:</label>
-      </b-col>
-      <b-col sm="3">
-        <b-form-input
-          type="number"
-          :value="incomeData.cash"
-          @input="(value) => $emit('setValue', 'cash', value)"
-        ></b-form-input>
       </b-col>
     </b-row>
 
