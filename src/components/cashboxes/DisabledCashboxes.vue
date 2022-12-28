@@ -1,13 +1,13 @@
 <template>
   <div
     v-if="getCashboxesDisabled.length === 0"
-    style="color: var(--primary); font-size: 23px; margin-top: 40px"
+    style="color: rgb(138 123 165); font-size: 23px; margin-top: 40px"
   >
     <p>No hay cajas deshabilitadas</p>
   </div>
 
   <div v-else>
-    <h3 class="pt-3" style="color: var(--primary)">Sus cajas deshabilitadas</h3>
+    <h3 class="pt-3" style="color: rgb(138 123 165)">Sus cajas deshabilitadas</h3>
     <b-row class="pt-2">
       <b-col
         cols="4"
@@ -64,12 +64,6 @@
             >
               {{ movement.categories.icon }}
             </span>
-            <!-- <b-icon
-              style="margin-top: 15px"
-              class="h3"
-              icon="exclamation-circle-fill"
-              variant="primary"
-            ></b-icon> -->
           </b-col>
           <b-col cols="10">
             <b-row>
