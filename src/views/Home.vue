@@ -12,7 +12,7 @@
           <Sidebar />
         </b-col>
         <b-col md="8" class="mt-3">
-          <Calendar />
+          <Calendar v-if="showCalendar" />
           <router-view />
         </b-col>
         <b-col class="footer-container">
@@ -47,6 +47,15 @@ export default {
   name: "Home",
   computed: {
     ...mapGetters(["getUser"]),
+    showCalendar() {
+      let isFound = this.$route.path.search("create");
+
+      return isFound !== -1 ||
+        this.$route.path === "/disabledCashboxes" ||
+        this.$route.path === "/categories"
+        ? false
+        : true;
+    },
   },
   mixins: [windowSizeMixin],
   components: {
