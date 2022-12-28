@@ -17,7 +17,10 @@ import SpendingsLayout from "@/views/SpendingsLayout";
 import CreateSpending from "@/components/Spendings/CreateSpending";
 import EditSpending from "@/components/Spendings/EditSpending";
 
-import Login from "@/views/Login";
+import LoginLayout from "@/views/LoginLayout";
+import LoginUser from "@/components/user/LoginUser";
+import CreateUser from "@/components/user/CreateUser";
+
 import Movements from "@/views/Movements";
 import DisabledCashboxes from "@/components/cashboxes/DisabledCashboxes";
 
@@ -35,9 +38,20 @@ const checkUser = async (to, from, next) => {
 
 const routes = [
   {
-    path: "/login",
-    name: "Login",
-    component: Login,
+    path: "/login/",
+    component: LoginLayout,
+    children: [
+      {
+        path: "loginUser",
+        name: "Login",
+        component: LoginUser,
+      },
+      {
+        path: "createUser",
+        name: "CreateUser",
+        component: CreateUser,
+      },
+    ],
   },
   {
     path: "/",
