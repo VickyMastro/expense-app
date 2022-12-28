@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      titleMovement: "Realizar transferencia",
+      titleMovement: "Transferir",
       transferData: {
         title: "",
         from_account_id: null,
