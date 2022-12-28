@@ -6,17 +6,32 @@
       </b-col>
     </b-row>
 
-    <b-row class="container-home" v-else>
-      <b-col md="4" style="background-color: var(--primary)">
-        <Sidebar />
-      </b-col>
-      <b-col md="8">
-        <CreateButton />
-        <router-view />
-      </b-col>
+    <div class="container-home" v-else>
+      <b-row v-if="windowWidth <= 767.98">
+        <b-col md="4" style="background-color: var(--primary)">
+          <Sidebar />
+        </b-col>
+        <b-col md="8" class="mt-3">
+          <Calendar />
+          <router-view />
+        </b-col>
+        <b-col class="footer-container">
+          <div>
+            <CreateButton />
+          </div>
+        </b-col>
+      </b-row>
 
-      <footer v-if="windowWidth <= 767.98" class="footer-container"></footer>
-    </b-row>
+      <b-row v-else>
+        <b-col md="3" style="background-color: var(--primary)">
+          <Sidebar />
+        </b-col>
+        <b-col md="9">
+          <CreateButton />
+          <router-view />
+        </b-col>
+      </b-row>
+    </div>
   </b-container>
 </template>
 
@@ -26,6 +41,7 @@ import windowSizeMixin from "../mixins/windowSizeMixin.js";
 
 import Sidebar from "../components/Sidebar.vue";
 import CreateButton from "../components/CreateButton.vue";
+import Calendar from "../components/Calendar";
 
 export default {
   name: "Home",
@@ -36,6 +52,7 @@ export default {
   components: {
     Sidebar,
     CreateButton,
+    Calendar,
   },
 };
 </script>
