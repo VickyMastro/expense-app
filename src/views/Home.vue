@@ -23,10 +23,10 @@
       </b-row>
 
       <b-row v-else>
-        <b-col md="3" style="background-color: var(--primary)">
+        <b-col cols="12" md="4" lg="3" style="background-color: var(--primary)">
           <Sidebar />
         </b-col>
-        <b-col md="9">
+        <b-col cols="12" md="8" lg="9">
           <CreateButton />
           <router-view />
         </b-col>
