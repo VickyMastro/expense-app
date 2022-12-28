@@ -7,7 +7,7 @@
   </div>
 
   <div v-else>
-    <h3 class="pt-3">Sus cajas deshabilitadas</h3>
+    <h3 class="pt-3" style="color: var(--primary)">Sus cajas deshabilitadas</h3>
     <b-row class="pt-2">
       <b-col
         cols="4"
@@ -57,12 +57,19 @@
       <div class="container-movements">
         <b-row>
           <b-col cols="2">
-            <b-icon
+            <span
+              :style="{ background: movement.categories.icon_color }"
+              style="margin-top: 15px"
+              class="category-icon material-icons"
+            >
+              {{ movement.categories.icon }}
+            </span>
+            <!-- <b-icon
               style="margin-top: 15px"
               class="h3"
               icon="exclamation-circle-fill"
               variant="primary"
-            ></b-icon>
+            ></b-icon> -->
           </b-col>
           <b-col cols="10">
             <b-row>
@@ -114,7 +121,7 @@ export default {
         this.selectCashboxId = cashboxId;
         const { error, data: cashboxMovements } = await supabaseClient
           .from("movements")
-          .select(`*, accounts!inner(id, name)`)
+          .select(`*, accounts!inner(id, name), categories!inner(icon, icon_color)`)
           .eq("accounts.id", cashboxId)
           .order("date", { ascending: false });
 
@@ -179,6 +186,13 @@ export default {
   box-shadow: rgb(138 123 165 / 69%) 0px 5px 15px;
 }
 
+.category-icon {
+  color: white;
+  margin-top: 15px;
+  margin-left: 5px;
+  padding: 5px;
+  border-radius: 15px;
+}
 /* dynamic classes */
 .cashboxSelect {
   border: 2px solid var(--primary);

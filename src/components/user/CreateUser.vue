@@ -33,7 +33,6 @@ export default {
     },
 
     async createUser() {
-      console.log("creando");
       try {
         const { error } = await supabaseClient.auth.signUp({
           name: this.userData.name,
@@ -44,7 +43,7 @@ export default {
 
         this.$toast.success("Revisa tu mail y confirmalo", {
           position: "top-right",
-          duration: 4000,
+          duration: 5000,
         });
 
         if (error) throw error;
